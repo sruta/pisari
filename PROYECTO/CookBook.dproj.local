@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2014/05/28 17:33:07.818.pas,C:\Users\Julio\Documents\RAD Studio\Projects\Unit2.pas=C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\ModuloDatos.pas</Transaction>
+    <Transaction>2014/05/28 17:33:07.818.dfm,C:\Users\Julio\Documents\RAD Studio\Projects\Unit2.dfm=C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\ModuloDatos.dfm</Transaction>
+    <Transaction>2014/05/28 17:33:31.866.pas,C:\Users\Julio\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Principal.pas</Transaction>
+    <Transaction>2014/05/28 17:33:31.866.dfm,C:\Users\Julio\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Principal.dfm</Transaction>
+    <Transaction>2014/05/28 17:33:37.462.dproj,C:\Users\Julio\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\CookBook.dproj</Transaction>
+    <Transaction>2014/05/28 18:08:23.860.pas,C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Unit1.pas=C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Administrar.pas</Transaction>
+    <Transaction>2014/05/28 18:08:23.860.dfm,C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Unit1.dfm=C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Administrar.dfm</Transaction>
+    <Transaction>2014/05/28 18:42:51.376.pas,C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Unit1.pas=C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Autores.pas</Transaction>
+    <Transaction>2014/05/28 18:42:51.376.dfm,C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Unit1.dfm=C:\Users\Julio\Documents\GitHub\pisari\PROYECTO\Autores.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

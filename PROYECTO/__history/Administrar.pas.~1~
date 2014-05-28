@@ -1,0 +1,27 @@
+unit Administrar;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls;
+
+type
+  TFAdministrar = class(TForm)
+    pnlLefter: TPanel;
+    pnlLibros: TPanel;
+    imgLibros: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FAdministrar: TFAdministrar;
+
+implementation
+
+{$R *.dfm}
+
+end.

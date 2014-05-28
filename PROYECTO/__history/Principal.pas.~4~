@@ -1,0 +1,32 @@
+unit Principal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, jpeg, ExtCtrls;
+
+type
+  TFPrincipal = class(TForm)
+    pnlHeader: TPanel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Image1: TImage;
+    Panel1: TPanel;
+    pnlLibros: TPanel;
+    imgLibros: TImage;
+    Panel2: TPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FPrincipal: TFPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+end.
