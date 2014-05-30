@@ -227,6 +227,7 @@ object FLibroABM: TFLibroABM
         ParentBackground = False
         ParentFont = False
         TabOrder = 0
+        ExplicitWidth = 417
       end
       object Button1: TButton
         Left = 16
@@ -242,6 +243,7 @@ object FLibroABM: TFLibroABM
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        ExplicitTop = 168
       end
       object Button2: TButton
         Left = 408
@@ -257,6 +259,8 @@ object FLibroABM: TFLibroABM
         Font.Style = []
         ParentFont = False
         TabOrder = 2
+        ExplicitLeft = 336
+        ExplicitTop = 168
       end
       object PageControl1: TPageControl
         Left = 16
@@ -267,6 +271,8 @@ object FLibroABM: TFLibroABM
         TabOrder = 3
         object tsDatosG: TTabSheet
           Caption = 'Datos Generales'
+          ExplicitLeft = 0
+          ExplicitHeight = 221
           object Label1: TLabel
             Left = 18
             Top = 24
@@ -467,14 +473,19 @@ object FLibroABM: TFLibroABM
         object TabSheet1: TTabSheet
           Caption = 'Sinopsis'
           ImageIndex = 1
+          ExplicitWidth = 281
+          ExplicitHeight = 165
         end
         object TabSheet2: TTabSheet
           Caption = 'Foto'
           ImageIndex = 2
+          ExplicitWidth = 281
+          ExplicitHeight = 165
         end
         object Sinopsis: TTabSheet
           Caption = 'Autores'
           ImageIndex = 3
+          ExplicitHeight = 221
         end
       end
     end

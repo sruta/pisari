@@ -777,8 +777,6 @@ object FPrincipal: TFPrincipal
     Width = 1119
     Height = 72
     Anchors = [akLeft, akTop, akRight]
-    Color = clPurple
-    ParentBackground = False
     TabOrder = 1
     DesignSize = (
       1119
@@ -791,13 +789,11 @@ object FPrincipal: TFPrincipal
       Hint = 'Lista De Libros'
       Anchors = [akLeft]
       Caption = 'Libros'
-      Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clPurple
       Font.Height = -29
       Font.Name = 'Jenna Sue'
       Font.Style = [fsBold, fsItalic]
-      ParentBackground = False
       ParentFont = False
       TabOrder = 0
     end
@@ -808,13 +804,11 @@ object FPrincipal: TFPrincipal
       Height = 49
       Anchors = [akRight]
       Caption = 'Administrar'
-      Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clPurple
       Font.Height = -29
       Font.Name = 'Jenna Sue'
       Font.Style = [fsBold]
-      ParentBackground = False
       ParentFont = False
       TabOrder = 1
       OnClick = pnlAdministrarClick
