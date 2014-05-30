@@ -3,8 +3,8 @@ object FAdministrar: TFAdministrar
   Top = 0
   Anchors = [akLeft, akRight, akBottom]
   Caption = 'FAdministrar'
-  ClientHeight = 741
-  ClientWidth = 1077
+  ClientHeight = 713
+  ClientWidth = 1022
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,45 +16,86 @@ object FAdministrar: TFAdministrar
   Visible = True
   WindowState = wsMaximized
   DesignSize = (
-    1077
-    741)
+    1022
+    713)
   PixelsPerInch = 96
   TextHeight = 13
   object pnlLefter: TPanel
     Left = 0
     Top = 0
     Width = 153
-    Height = 741
+    Height = 713
     Anchors = [akLeft, akTop, akBottom]
+    BevelOuter = bvNone
+    Color = clBackground
+    ParentBackground = False
     TabOrder = 0
+    ExplicitHeight = 741
     object btnLibros: TSpeedButton
       Left = 16
       Top = 192
       Width = 120
       Height = 75
       Caption = 'Libros'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
-    object SpeedButton1: TSpeedButton
+    object btnAutores: TSpeedButton
       Left = 16
       Top = 296
       Width = 120
       Height = 75
       Caption = 'Autores'
-      OnClick = SpeedButton1Click
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnAutoresClick
     end
-    object SpeedButton2: TSpeedButton
+    object btnEditoriales: TSpeedButton
       Left = 16
       Top = 400
       Width = 120
       Height = 75
       Caption = 'Editoriales'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnEditorialesClick
     end
-    object SpeedButton3: TSpeedButton
+    object btnIdiomas: TSpeedButton
       Left = 16
       Top = 504
       Width = 120
       Height = 75
       Caption = 'Idiomas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnIdiomasClick
     end
+  end
+  object Panel1: TPanel
+    Left = 153
+    Top = 0
+    Width = 869
+    Height = 713
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    BevelOuter = bvNone
+    Color = 14725088
+    ParentBackground = False
+    TabOrder = 1
   end
 end

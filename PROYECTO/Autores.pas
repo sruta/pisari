@@ -5,11 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, DBTables, Grids, DBGrids, Buttons, ExtCtrls, StdCtrls, Mask,
-  DBCtrls;
+  DBCtrls, ActnList;
 
 type
   TFAutores = class(TForm)
-    pnlLefter: TPanel;
     Panel1: TPanel;
     btnLibros: TSpeedButton;
     SpeedButton1: TSpeedButton;
@@ -17,27 +16,44 @@ type
     Panel2: TPanel;
     DBGrid1: TDBGrid;
     qAutor: TQuery;
-    qAutoridAutor: TIntegerField;
-    qAutornombre: TStringField;
     dsAutor: TDataSource;
-    pnlDatosAutor: TPanel;
+    pnlDatos: TPanel;
     uAutor: TUpdateSQL;
-    Panel3: TPanel;
+    pnlTitulo: TPanel;
     dbeNombre: TDBEdit;
     Label1: TLabel;
     Button1: TButton;
     Button2: TButton;
     qNuevoAutor: TQuery;
     edFiltrar: TEdit;
+    lbFiltro: TLabel;
+    ActionList1: TActionList;
+    AProcesar: TAction;
+    qAutoridAutor: TIntegerField;
+    qAutornombre: TStringField;
+    AModificar: TAction;
+    pnlLefter: TPanel;
+    shPosition: TShape;
+    SpeedButton3: TSpeedButton;
+    btnAutores: TSpeedButton;
+    btnEditoriales: TSpeedButton;
+    btnIdiomas: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure btnLibrosClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure AProcesarExecute(Sender: TObject);
+    procedure edFiltrarChange(Sender: TObject);
+    procedure dbeNombreKeyPress(Sender: TObject; var Key: Char);
+    procedure AModificarExecute(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnEditorialesClick(Sender: TObject);
+    procedure btnIdiomasClick(Sender: TObject);
   private
     { Private declarations }
-    _Modo:char;
+    _Modo: char;
     procedure panelShow;
     procedure panelHide;
   public
@@ -49,25 +65,50 @@ var
 
 implementation
 
+uses EditorialABM, IdiomasABM, Principal;
+
 {$R *.dfm}
+
+procedure TFAutores.AModificarExecute(Sender: TObject);
+begin
+  _Modo := 'M';
+  panelShow;
+  pnlTitulo.Caption := 'Modificar Autor';
+end;
+
+procedure TFAutores.AProcesarExecute(Sender: TObject);
+begin
+  qAutor.Close;
+  qAutor.ParamByName('Autor').AsString := edFiltrar.Text;
+  qAutor.Open;
+end;
+
+procedure TFAutores.btnEditorialesClick(Sender: TObject);
+begin
+    FEditorialABM:=TFEditorialABM.Create(Self);
+end;
+
+procedure TFAutores.btnIdiomasClick(Sender: TObject);
+begin
+  FIdiomasABM:=TFIdiomasABM.Create(Self);
+end;
 
 procedure TFAutores.btnLibrosClick(Sender: TObject);
 begin
-  _Modo:='A';
+  _Modo := 'A';
   panelShow;
-  dbeNombre.Text:='';
-  qAutor.Insert;
+  dbeNombre.Text := '';
+  pnlTitulo.Caption := 'Nuevo Autor';
 end;
 
 procedure TFAutores.Button1Click(Sender: TObject);
 begin
-
-  if(dbeNombre.Text<>'')then
+  if (dbeNombre.Text <> '') then
   begin
-    if(_Modo='A')then
+    if (_Modo = 'A') then
     begin
       qNuevoAutor.Close;
-      qNuevoAutor.ParamByName('Nombre').AsString:=dbeNombre.Text;
+      qNuevoAutor.ParamByName('Nombre').AsString := dbeNombre.Text;
       qNuevoAutor.ExecSQL;
       qAutor.Close;
       qAutor.Open;
@@ -83,46 +124,63 @@ begin
   panelHide;
 end;
 
+procedure TFAutores.dbeNombreKeyPress(Sender: TObject; var Key: Char);
+begin
+//
+end;
+
+procedure TFAutores.DBGrid1DblClick(Sender: TObject);
+begin
+  AModificarExecute(Self);
+end;
+
+procedure TFAutores.edFiltrarChange(Sender: TObject);
+begin
+  AProcesarExecute(Self);
+end;
+
 procedure TFAutores.FormCreate(Sender: TObject);
 begin
-  qAutor.Open;
+  AProcesarExecute(Self);
+  FPrincipal.lbPosicion.Caption:='Administrar >> Autores'
 end;
 
 procedure TFAutores.panelShow;
 begin
-  pnlDatosAutor.Show;
-  edFiltrar.Enabled:=false;
-  panel1.Enabled:=false;
-  DBGrid1.Enabled:=False;
+  pnlDatos.Show;
+  edFiltrar.Enabled := false;
+  Panel1.Enabled := false;
+  DBGrid1.Enabled := false;
 
-  if(_Modo = 'A')then
+  if (_Modo = 'A') then
     qAutor.Insert
-  else
-    if(_Modo = 'M')then
-      qAutor.Edit;
+  else if (_Modo = 'M') then
+    qAutor.Edit;
 end;
 
 procedure TFAutores.SpeedButton1Click(Sender: TObject);
 begin
-  _Modo:='M';
-  panelShow;
+  AModificarExecute(Self);
 end;
 
 procedure TFAutores.SpeedButton2Click(Sender: TObject);
 begin
-  if(MessageDlg('¿Está seguro de que desea eliminar el autor seleccionado?', mtInformation, mbOKCancel, 0)=mrOk)then
+  if (MessageDlg('¿Está seguro de que desea eliminar el autor seleccionado?',
+      mtInformation, mbOKCancel, 0) = mrOk) then
     qAutor.Delete;
 end;
 
 procedure TFAutores.panelHide;
 begin
-  edFiltrar.Enabled:=True;
-  panel1.Enabled:=true;
-  DBGrid1.Enabled:=True;
+  edFiltrar.Enabled := True;
+  Panel1.Enabled := True;
+  DBGrid1.Enabled := True;
 
-  pnlDatosAutor.Hide;
+  pnlDatos.Hide;
+  if(_Modo='M')then
+    qAutor.Post;
+  AProcesarExecute(Self);
 end;
-
 
 
 end.

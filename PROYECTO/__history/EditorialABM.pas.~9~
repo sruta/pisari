@@ -1,0 +1,172 @@
+unit EditorialABM;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ActnList, DBTables, StdCtrls, Mask, DBCtrls, Grids, DBGrids,
+  Buttons, ExtCtrls;
+
+type
+  TFEditorialABM = class(TForm)
+    Panel2: TPanel;
+    lbFiltro: TLabel;
+    DBGrid1: TDBGrid;
+    pnlDatos: TPanel;
+    Label1: TLabel;
+    pnlTitulo: TPanel;
+    dbeNombre: TDBEdit;
+    Button1: TButton;
+    Button2: TButton;
+    edFiltrar: TEdit;
+    Panel1: TPanel;
+    btnLibros: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    qNuevaEditorial: TQuery;
+    uEditorial: TUpdateSQL;
+    dsEditorial: TDataSource;
+    qEditorial: TQuery;
+    ActionList1: TActionList;
+    AProcesar: TAction;
+    AModificar: TAction;
+    qEditorialidEditorial: TIntegerField;
+    qEditorialNombre: TStringField;
+    pnlLefter: TPanel;
+    shPosition: TShape;
+    SpeedButton3: TSpeedButton;
+    btnAutores: TSpeedButton;
+    btnEditoriales: TSpeedButton;
+    btnIdiomas: TSpeedButton;
+    procedure btnLibrosClick(Sender: TObject);
+    procedure AProcesarExecute(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure AModificarExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnAutoresClick(Sender: TObject);
+    procedure btnIdiomasClick(Sender: TObject);
+  private
+    { Private declarations }
+    _Modo: char;
+    procedure panelShow;
+    procedure panelHide;
+  public
+    { Public declarations }
+  end;
+
+var
+  FEditorialABM: TFEditorialABM;
+
+implementation
+
+uses Autores;
+
+{$R *.dfm}
+
+procedure TFEditorialABM.AModificarExecute(Sender: TObject);
+begin
+  _Modo := 'M';
+  panelShow;
+  pnlTitulo.Caption := 'Modificar Editorial';
+end;
+
+procedure TFEditorialABM.AProcesarExecute(Sender: TObject);
+begin
+  qEditorial.Close;
+  qEditorial.ParamByName('Editorial').AsString := edFiltrar.Text;
+  qEditorial.Open;
+end;
+
+procedure TFEditorialABM.btnAutoresClick(Sender: TObject);
+begin
+  FAutores:=TFAutores.Create(Self);
+end;
+
+procedure TFEditorialABM.btnIdiomasClick(Sender: TObject);
+begin
+  FIdiomasABM:=TFIdiomasABM.Create(Self);
+end;
+
+procedure TFEditorialABM.btnLibrosClick(Sender: TObject);
+begin
+  _Modo := 'A';
+  panelShow;
+  dbeNombre.Text := '';
+  pnlTitulo.Caption := 'Nueva Editorial';
+end;
+
+procedure TFEditorialABM.Button1Click(Sender: TObject);
+begin
+  if (dbeNombre.Text <> '') then
+  begin
+    if (_Modo = 'A') then
+    begin
+      qNuevaEditorial.Close;
+      qNuevaEditorial.ParamByName('Nombre').AsString := dbeNombre.Text;
+      qNuevaEditorial.ExecSQL;
+      qEditorial.Close;
+      qEditorial.Open;
+    end;
+    panelHide;
+  end
+  else
+    ShowMessage('Debe tipear un nombre para la nueva editorial');
+end;
+
+procedure TFEditorialABM.Button2Click(Sender: TObject);
+begin
+  panelHide;
+end;
+
+procedure TFEditorialABM.DBGrid1DblClick(Sender: TObject);
+begin
+  AModificarExecute(Self);
+end;
+
+procedure TFEditorialABM.FormCreate(Sender: TObject);
+begin
+  AProcesarExecute(Self);
+end;
+
+procedure TFEditorialABM.panelHide;
+begin
+  edFiltrar.Enabled := True;
+  Panel1.Enabled := True;
+  DBGrid1.Enabled := True;
+
+  pnlDatos.Hide;
+  if(_Modo='M')then
+    qEditorial.Post;
+  AProcesarExecute(Self);
+end;
+
+procedure TFEditorialABM.panelShow;
+begin
+  pnlDatos.Show;
+  edFiltrar.Enabled := false;
+  Panel1.Enabled := false;
+  DBGrid1.Enabled := false;
+
+  if (_Modo = 'A') then
+    qEditorial.Insert
+  else if (_Modo = 'M') then
+    qEditorial.Edit;
+end;
+
+procedure TFEditorialABM.SpeedButton1Click(Sender: TObject);
+begin
+  AModificarExecute(Self);
+end;
+
+procedure TFEditorialABM.SpeedButton2Click(Sender: TObject);
+begin
+  if (MessageDlg('¿Está seguro de que desea eliminar la editorial seleccionada?',
+      mtInformation, mbOKCancel, 0) = mrOk) then
+    qEditorial.Delete;
+end;
+
+end.

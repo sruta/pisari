@@ -1,0 +1,56 @@
+unit Principal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, jpeg, ExtCtrls, pngimage;
+
+type
+  TFPrincipal = class(TForm)
+    pnlHeader: TPanel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    pnlBotones: TPanel;
+    pnlLibros: TPanel;
+    imgLibros: TImage;
+    pnlAdministrar: TPanel;
+    imgAdministrar: TImage;
+    lbPosicion: TLabel;
+    imgLogo: TImage;
+    procedure imgAdministrarClick(Sender: TObject);
+
+  private
+    { Private declarations }
+    _VentanaActiva:TForm;
+    procedure abrirVentanaMDI(Form:TForm);
+  public
+    { Public declarations }
+  end;
+
+var
+  FPrincipal: TFPrincipal;
+
+implementation
+
+uses Administrar;
+
+{$R *.dfm}
+
+
+procedure TFPrincipal.imgAdministrarClick(Sender: TObject);
+begin
+  lbPosicion.Caption:='Administrar';
+//  FAdministrar:=TFAdministrar.Create(Self);
+  abrirVentanaMDI(FAdministrar);
+end;
+
+procedure TFPrincipal.abrirVentanaMDI(Form:TForm);
+begin
+  if(_VentanaActiva<>nil)then
+    _VentanaActiva.Close;
+  _VentanaActiva:=Form;
+  Form:=Form.ClassType.Create(Self);
+end;
+
+end.

@@ -1,0 +1,66 @@
+unit Administrar;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, Buttons;
+
+type
+  TFAdministrar = class(TForm)
+    pnlLefter: TPanel;
+    btnLibros: TSpeedButton;
+    btnAutores: TSpeedButton;
+    btnEditoriales: TSpeedButton;
+    btnIdiomas: TSpeedButton;
+    Panel1: TPanel;
+    shPosition: TShape;
+    procedure btnAutoresClick(Sender: TObject);
+    procedure btnEditorialesClick(Sender: TObject);
+    procedure btnIdiomasClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure moverShape(pos:Integer);
+  end;
+
+var
+  FAdministrar: TFAdministrar;
+
+implementation
+
+uses Principal, Autores, EditorialABM, IdiomasABM;
+
+{$R *.dfm}
+
+procedure TFAdministrar.btnAutoresClick(Sender: TObject);
+begin
+  FAutores:=TFAutores.Create(Self);
+  moverShape(btnAutores.top);
+end;
+
+procedure TFAdministrar.btnEditorialesClick(Sender: TObject);
+begin
+  FEditorialABM:=TFEditorialABM.Create(Self);
+end;
+
+procedure TFAdministrar.btnIdiomasClick(Sender: TObject);
+begin
+  FIdiomasABM:=TFIdiomasABM.Create(Self);
+end;
+
+procedure TFAdministrar.moverShape(pos:integer);
+var
+  i:integer;
+begin
+  for I := 0 to pos div 10 do
+  begin
+    shPosition.Top:=shPosition.Top+10;
+    sleep(1);
+  end;
+
+end;
+
+
+end.

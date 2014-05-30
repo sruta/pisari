@@ -10,10 +10,13 @@ type
   TFAdministrar = class(TForm)
     pnlLefter: TPanel;
     btnLibros: TSpeedButton;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
-    procedure SpeedButton1Click(Sender: TObject);
+    btnAutores: TSpeedButton;
+    btnEditoriales: TSpeedButton;
+    btnIdiomas: TSpeedButton;
+    Panel1: TPanel;
+    procedure btnAutoresClick(Sender: TObject);
+    procedure btnEditorialesClick(Sender: TObject);
+    procedure btnIdiomasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,13 +28,24 @@ var
 
 implementation
 
-uses Principal, Autores;
+uses Principal, Autores, EditorialABM, IdiomasABM;
 
 {$R *.dfm}
 
-procedure TFAdministrar.SpeedButton1Click(Sender: TObject);
+procedure TFAdministrar.btnAutoresClick(Sender: TObject);
 begin
   FAutores:=TFAutores.Create(Self);
 end;
+
+procedure TFAdministrar.btnEditorialesClick(Sender: TObject);
+begin
+  FEditorialABM:=TFEditorialABM.Create(Self);
+end;
+
+procedure TFAdministrar.btnIdiomasClick(Sender: TObject);
+begin
+  FIdiomasABM:=TFIdiomasABM.Create(Self);
+end;
+
 
 end.

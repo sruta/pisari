@@ -21,43 +21,56 @@ object FAutores: TFAutores
     713)
   PixelsPerInch = 96
   TextHeight = 13
-  object pnlLefter: TPanel
-    Left = 0
-    Top = -28
-    Width = 153
-    Height = 741
-    Anchors = [akLeft, akTop, akBottom]
-    TabOrder = 0
-  end
   object Panel1: TPanel
     Left = 870
     Top = -28
     Width = 153
     Height = 741
     Anchors = [akTop, akRight, akBottom]
-    TabOrder = 1
+    BevelOuter = bvNone
+    Color = clBackground
+    ParentBackground = False
+    TabOrder = 0
     object btnLibros: TSpeedButton
-      Left = 16
-      Top = 344
+      Left = 21
+      Top = 220
       Width = 120
       Height = 75
       Caption = 'Agregar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
       OnClick = btnLibrosClick
     end
     object SpeedButton1: TSpeedButton
-      Left = 16
-      Top = 448
+      Left = 21
+      Top = 324
       Width = 120
       Height = 75
       Caption = 'Modificar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
       OnClick = SpeedButton1Click
     end
     object SpeedButton2: TSpeedButton
-      Left = 16
-      Top = 552
+      Left = 21
+      Top = 428
       Width = 120
       Height = 75
       Caption = 'Eliminar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
       OnClick = SpeedButton2Click
     end
   end
@@ -67,69 +80,128 @@ object FAutores: TFAutores
     Width = 728
     Height = 713
     Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 2
+    BevelOuter = bvNone
+    Color = 14725088
+    ParentBackground = False
+    TabOrder = 1
     DesignSize = (
       728
       713)
+    object lbFiltro: TLabel
+      AlignWithMargins = True
+      Left = 2
+      Top = 644
+      Width = 38
+      Height = 16
+      Anchors = [akLeft]
+      Caption = 'Buscar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object DBGrid1: TDBGrid
-      Left = 0
+      Left = 8
       Top = 182
-      Width = 727
+      Width = 714
       Height = 417
       Anchors = [akLeft, akTop, akRight, akBottom]
       DataSource = dsAutor
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      OnDblClick = DBGrid1DblClick
       Columns = <
         item
           Expanded = False
           FieldName = 'nombre'
-          Width = 432
+          Title.Caption = 'Autor'
           Visible = True
         end>
     end
-    object pnlDatosAutor: TPanel
+    object pnlDatos: TPanel
+      AlignWithMargins = True
       Left = 160
       Top = 304
       Width = 417
       Height = 209
       Anchors = []
+      Color = clBackground
+      ParentBackground = False
       TabOrder = 1
       Visible = False
+      DesignSize = (
+        417
+        209)
       object Label1: TLabel
-        Left = 40
-        Top = 80
-        Width = 41
-        Height = 13
+        Left = 26
+        Top = 88
+        Width = 65
+        Height = 18
         Caption = 'Nombre:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clPurple
+        Font.Height = -16
+        Font.Name = 'Lucida Sans'
+        Font.Style = []
+        ParentFont = False
       end
-      object Panel3: TPanel
+      object pnlTitulo: TPanel
         Left = 0
         Top = 0
         Width = 417
         Height = 41
-        Caption = 'Nuevo Autor'
+        Anchors = [akLeft, akTop, akRight]
+        Color = clPurple
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Lucida Sans'
+        Font.Style = []
+        ParentBackground = False
+        ParentFont = False
         TabOrder = 0
       end
       object dbeNombre: TDBEdit
-        Left = 95
-        Top = 72
+        Left = 97
+        Top = 87
         Width = 298
-        Height = 25
+        Height = 22
         DataField = 'nombre'
         DataSource = dsAutor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Lucida Sans'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 1
+        OnKeyPress = dbeNombreKeyPress
       end
       object Button1: TButton
         Left = 16
         Top = 168
         Width = 75
         Height = 25
+        Anchors = [akLeft, akBottom]
         Caption = 'Aceptar'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Lucida Sans'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 2
         OnClick = Button1Click
       end
@@ -138,28 +210,124 @@ object FAutores: TFAutores
         Top = 168
         Width = 75
         Height = 25
+        Anchors = [akRight, akBottom]
         Caption = 'Cancelar'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Lucida Sans'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 3
         OnClick = Button2Click
       end
     end
     object edFiltrar: TEdit
-      Left = 16
-      Top = 672
-      Width = 673
+      AlignWithMargins = True
+      Left = 52
+      Top = 643
+      Width = 510
       Height = 21
-      Anchors = [akLeft, akRight, akBottom]
+      Anchors = [akLeft]
       TabOrder = 2
+      OnChange = edFiltrarChange
+    end
+  end
+  object pnlLefter: TPanel
+    Left = 0
+    Top = 0
+    Width = 153
+    Height = 713
+    Anchors = [akLeft, akTop, akBottom]
+    BevelOuter = bvNone
+    Color = clBackground
+    ParentBackground = False
+    TabOrder = 2
+    ExplicitHeight = 741
+    object shPosition: TShape
+      Left = 17
+      Top = 297
+      Width = 137
+      Height = 74
+      Brush.Color = 14725088
+      Pen.Style = psClear
+    end
+    object SpeedButton3: TSpeedButton
+      Left = 16
+      Top = 192
+      Width = 120
+      Height = 75
+      Caption = 'Libros'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object btnAutores: TSpeedButton
+      Left = 16
+      Top = 296
+      Width = 120
+      Height = 75
+      Caption = 'Autores'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object btnEditoriales: TSpeedButton
+      Left = 16
+      Top = 400
+      Width = 120
+      Height = 75
+      Caption = 'Editoriales'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnEditorialesClick
+    end
+    object btnIdiomas: TSpeedButton
+      Left = 16
+      Top = 504
+      Width = 120
+      Height = 75
+      Caption = 'Idiomas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnIdiomasClick
     end
   end
   object qAutor: TQuery
     DatabaseName = 'CookBook'
     RequestLive = True
     SQL.Strings = (
-      'SELECT * FROM Autor')
+      'SELECT *'
+      'FROM Autor'
+      'WHERE (:Autor = '#39#39')or(Nombre like '#39'%'#39' + :Autor + '#39'%'#39')')
     UpdateObject = uAutor
     Left = 168
     Top = 640
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'Autor'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftString
+        Name = 'Autor'
+        ParamType = ptUnknown
+      end>
     object qAutoridAutor: TIntegerField
       FieldName = 'idAutor'
       Origin = 'COOKBOOK.Autor.idAutor'
@@ -185,9 +353,9 @@ object FAutores: TFAutores
       '  idAutor = :OLD_idAutor')
     InsertSQL.Strings = (
       'insert into Autor'
-      '  (idAutor, nombre)'
+      '  (nombre)'
       'values'
-      '  (:idAutor, :nombre)')
+      '  (:nombre)')
     DeleteSQL.Strings = (
       'delete from Autor'
       'where'
@@ -200,7 +368,7 @@ object FAutores: TFAutores
     SQL.Strings = (
       'INSERT INTO Autor (Nombre)'
       'VALUES (:Nombre)')
-    Left = 312
+    Left = 328
     Top = 640
     ParamData = <
       item
@@ -208,5 +376,18 @@ object FAutores: TFAutores
         Name = 'Nombre'
         ParamType = ptUnknown
       end>
+  end
+  object ActionList1: TActionList
+    Left = 120
+    Top = 640
+    object AProcesar: TAction
+      Caption = 'Procesar'
+      ShortCut = 116
+      OnExecute = AProcesarExecute
+    end
+    object AModificar: TAction
+      Caption = 'Modificar'
+      OnExecute = AModificarExecute
+    end
   end
 end

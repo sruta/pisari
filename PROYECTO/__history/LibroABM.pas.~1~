@@ -1,0 +1,46 @@
+unit LibroABM;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DBTables, DB, ActnList, Buttons, StdCtrls, Mask, DBCtrls, Grids,
+  DBGrids, ExtCtrls;
+
+type
+  TFLibroABM = class(TForm)
+    Panel2: TPanel;
+    lbFiltro: TLabel;
+    DBGrid1: TDBGrid;
+    pnlDatos: TPanel;
+    Label1: TLabel;
+    pnlTitulo: TPanel;
+    dbeNombre: TDBEdit;
+    Button1: TButton;
+    Button2: TButton;
+    edFiltrar: TEdit;
+    Panel1: TPanel;
+    btnLibros: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    ActionList1: TActionList;
+    AProcesar: TAction;
+    AModificar: TAction;
+    qLibro: TQuery;
+    dsLibro: TDataSource;
+    uLibro: TUpdateSQL;
+    qNuevoLibro: TQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FLibroABM: TFLibroABM;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -56,6 +56,15 @@
 			<DCCReference Include="Autores.pas">
 				<Form>FAutores</Form>
 			</DCCReference>
+			<DCCReference Include="EditorialABM.pas">
+				<Form>FEditorialABM</Form>
+			</DCCReference>
+			<DCCReference Include="IdiomasABM.pas">
+				<Form>FIdiomasABM</Form>
+			</DCCReference>
+			<DCCReference Include="LibroABM.pas">
+				<Form>FLibroABM</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

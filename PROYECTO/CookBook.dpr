@@ -5,7 +5,10 @@ uses
   Principal in 'Principal.pas' {FPrincipal},
   ModuloDatos in 'ModuloDatos.pas' {DataModule2: TDataModule},
   Administrar in 'Administrar.pas' {FAdministrar},
-  Autores in 'Autores.pas' {FAutores};
+  Autores in 'Autores.pas' {FAutores},
+  EditorialABM in 'EditorialABM.pas' {FEditorialABM},
+  IdiomasABM in 'IdiomasABM.pas' {FIdiomasABM},
+  LibroABM in 'LibroABM.pas' {FLibroABM};
 
 {$R *.res}
 

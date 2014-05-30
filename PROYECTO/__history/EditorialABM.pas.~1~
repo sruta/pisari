@@ -1,0 +1,53 @@
+unit EditorialABM;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ActnList, DBTables, StdCtrls, Mask, DBCtrls, Grids, DBGrids,
+  Buttons, ExtCtrls;
+
+type
+  TFEditorialABM = class(TForm)
+    pnlLefter: TPanel;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    Panel2: TPanel;
+    lbFiltro: TLabel;
+    DBGrid1: TDBGrid;
+    pnlDatosAutor: TPanel;
+    Label1: TLabel;
+    pnlTitulo: TPanel;
+    dbeNombre: TDBEdit;
+    Button1: TButton;
+    Button2: TButton;
+    edFiltrar: TEdit;
+    Panel1: TPanel;
+    btnLibros: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    qNuevoAutor: TQuery;
+    uAutor: TUpdateSQL;
+    dsEditorial: TDataSource;
+    qEditorial: TQuery;
+    ActionList1: TActionList;
+    AProcesar: TAction;
+    AModificar: TAction;
+    qEditorialidEditorial: TIntegerField;
+    qEditorialNombre: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FEditorialABM: TFEditorialABM;
+
+implementation
+
+{$R *.dfm}
+
+end.
