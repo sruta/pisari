@@ -27,10 +27,15 @@ object FAdministrar: TFAdministrar
     Height = 713
     Anchors = [akLeft, akTop, akBottom]
     BevelOuter = bvNone
-    Color = clBackground
+    Color = 14725088
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
     ParentBackground = False
+    ParentFont = False
     TabOrder = 0
-    ExplicitHeight = 741
     object btnLibros: TSpeedButton
       Left = 16
       Top = 192
@@ -43,6 +48,7 @@ object FAdministrar: TFAdministrar
       Font.Name = 'Lucida Sans'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
     end
     object btnAutores: TSpeedButton
       Left = 16
@@ -94,7 +100,7 @@ object FAdministrar: TFAdministrar
     Height = 713
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
-    Color = 14725088
+    Color = 15390207
     ParentBackground = False
     TabOrder = 1
   end

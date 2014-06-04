@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, DBTables, Grids, DBGrids, Buttons, ExtCtrls, StdCtrls, Mask,
-  DBCtrls, ActnList;
+  DBCtrls, ActnList, Menus;
 
 type
   TFAutores = class(TForm)
@@ -38,6 +38,7 @@ type
     btnAutores: TSpeedButton;
     btnEditoriales: TSpeedButton;
     btnIdiomas: TSpeedButton;
+    MainMenu1: TMainMenu;
     procedure FormCreate(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -112,7 +113,10 @@ begin
       qNuevoAutor.ExecSQL;
       qAutor.Close;
       qAutor.Open;
-    end;
+    end
+    else
+      if(_Modo='M')then
+        qAutor.Post;
     panelHide;
   end
   else
@@ -126,7 +130,7 @@ end;
 
 procedure TFAutores.dbeNombreKeyPress(Sender: TObject; var Key: Char);
 begin
-//
+   if ((NOT (UpCase(Key) in ['A'..'Z'])) and (Key <> #8) and (Key <> #13) and (Key <> #32)) then Key := #0;
 end;
 
 procedure TFAutores.DBGrid1DblClick(Sender: TObject);
@@ -138,6 +142,8 @@ procedure TFAutores.edFiltrarChange(Sender: TObject);
 begin
   AProcesarExecute(Self);
 end;
+
+
 
 procedure TFAutores.FormCreate(Sender: TObject);
 begin
@@ -151,6 +157,7 @@ begin
   edFiltrar.Enabled := false;
   Panel1.Enabled := false;
   DBGrid1.Enabled := false;
+  dbeNombre.SetFocus;
 
   if (_Modo = 'A') then
     qAutor.Insert
@@ -177,8 +184,6 @@ begin
   DBGrid1.Enabled := True;
 
   pnlDatos.Hide;
-  if(_Modo='M')then
-    qAutor.Post;
   AProcesarExecute(Self);
 end;
 

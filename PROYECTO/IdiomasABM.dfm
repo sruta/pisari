@@ -27,7 +27,7 @@ object FIdiomasABM: TFIdiomasABM
     Height = 741
     Anchors = [akTop, akRight, akBottom]
     BevelOuter = bvNone
-    Color = clBackground
+    Color = 15390207
     ParentBackground = False
     TabOrder = 1
     object SpeedButton4: TSpeedButton
@@ -80,7 +80,7 @@ object FIdiomasABM: TFIdiomasABM
     Height = 713
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
-    Color = 14725088
+    Color = 15390207
     ParentBackground = False
     TabOrder = 0
     DesignSize = (
@@ -88,7 +88,7 @@ object FIdiomasABM: TFIdiomasABM
       713)
     object lbFiltro: TLabel
       AlignWithMargins = True
-      Left = 2
+      Left = 8
       Top = 644
       Width = 38
       Height = 16
@@ -113,6 +113,7 @@ object FIdiomasABM: TFIdiomasABM
       Font.Height = -13
       Font.Name = 'Lucida Sans'
       Font.Style = []
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -126,11 +127,6 @@ object FIdiomasABM: TFIdiomasABM
           Expanded = False
           FieldName = 'descripcion'
           Title.Caption = 'Idioma'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = []
           Visible = True
         end>
     end
@@ -141,7 +137,7 @@ object FIdiomasABM: TFIdiomasABM
       Width = 417
       Height = 209
       Anchors = []
-      Color = clBackground
+      Color = 15390207
       ParentBackground = False
       TabOrder = 1
       Visible = False
@@ -191,6 +187,7 @@ object FIdiomasABM: TFIdiomasABM
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        OnKeyPress = dbeNombreKeyPress
       end
       object Button1: TButton
         Left = 16
@@ -234,25 +231,25 @@ object FIdiomasABM: TFIdiomasABM
       Anchors = [akLeft]
       TabOrder = 2
       OnChange = AProcesarExecute
+      OnKeyPress = dbeNombreKeyPress
     end
   end
   object pnlLefter: TPanel
-    Left = 0
+    Left = 1
     Top = 0
     Width = 153
     Height = 713
     Anchors = [akLeft, akTop, akBottom]
     BevelOuter = bvNone
-    Color = clBackground
+    Color = 14725088
     ParentBackground = False
     TabOrder = 2
-    ExplicitHeight = 741
     object shPosition: TShape
       Left = 17
       Top = 505
       Width = 137
       Height = 74
-      Brush.Color = 14725088
+      Brush.Color = 15390207
       Pen.Style = psClear
     end
     object btnLibros: TSpeedButton
@@ -267,6 +264,7 @@ object FIdiomasABM: TFIdiomasABM
       Font.Name = 'Lucida Sans'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
     end
     object btnAutores: TSpeedButton
       Left = 16
@@ -311,8 +309,8 @@ object FIdiomasABM: TFIdiomasABM
     end
   end
   object ActionList1: TActionList
-    Left = 120
-    Top = 640
+    Left = 168
+    Top = 32
     object AProcesar: TAction
       Caption = 'Procesar'
       ShortCut = 116
@@ -331,8 +329,8 @@ object FIdiomasABM: TFIdiomasABM
       'FROM Idioma'
       'WHERE (:Idioma = '#39#39')or(Descripcion like '#39'%'#39' + :Idioma + '#39'%'#39')')
     UpdateObject = uAutor
-    Left = 168
-    Top = 640
+    Left = 216
+    Top = 32
     ParamData = <
       item
         DataType = ftString
@@ -356,8 +354,8 @@ object FIdiomasABM: TFIdiomasABM
   end
   object dsIdioma: TDataSource
     DataSet = qIdioma
-    Left = 216
-    Top = 640
+    Left = 264
+    Top = 32
   end
   object uAutor: TUpdateSQL
     ModifySQL.Strings = (
@@ -376,16 +374,16 @@ object FIdiomasABM: TFIdiomasABM
       'delete from Idioma'
       'where'
       '  idIdioma = :OLD_idIdioma')
-    Left = 264
-    Top = 640
+    Left = 312
+    Top = 32
   end
   object qNuevoIdioma: TQuery
     DatabaseName = 'CookBook'
     SQL.Strings = (
       'INSERT INTO Idioma (Descripcion)'
       'VALUES (:Descripcion)')
-    Left = 312
-    Top = 640
+    Left = 360
+    Top = 32
     ParamData = <
       item
         DataType = ftString

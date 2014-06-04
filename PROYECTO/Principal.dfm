@@ -32,7 +32,7 @@ object FPrincipal: TFPrincipal
       97)
     object lbPosicion: TLabel
       Left = 520
-      Top = 23
+      Top = 40
       Width = 52
       Height = 46
       Alignment = taCenter
@@ -761,6 +761,7 @@ object FPrincipal: TFPrincipal
       Height = 21
       Anchors = [akTop, akRight]
       TabOrder = 0
+      Visible = False
     end
     object Edit2: TEdit
       Left = 952
@@ -769,6 +770,7 @@ object FPrincipal: TFPrincipal
       Height = 21
       Anchors = [akTop, akRight]
       TabOrder = 1
+      Visible = False
     end
   end
   object pnlBotones: TPanel
@@ -777,6 +779,7 @@ object FPrincipal: TFPrincipal
     Width = 1119
     Height = 72
     Anchors = [akLeft, akTop, akRight]
+    BevelOuter = bvNone
     Color = clPurple
     ParentBackground = False
     TabOrder = 1
@@ -784,34 +787,37 @@ object FPrincipal: TFPrincipal
       1119
       72)
     object pnlLibros: TPanel
-      Left = 12
-      Top = 11
-      Width = 97
+      Left = -1
+      Top = 17
+      Width = 125
       Height = 49
       Hint = 'Lista De Libros'
       Anchors = [akLeft]
+      BevelOuter = bvNone
       Caption = 'Libros'
-      Color = clWhite
+      Color = clPurple
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clPurple
-      Font.Height = -29
+      Font.Color = clWhite
+      Font.Height = -40
       Font.Name = 'Jenna Sue'
       Font.Style = [fsBold, fsItalic]
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
+      Visible = False
     end
     object pnlAdministrar: TPanel
-      Left = 996
-      Top = 11
-      Width = 97
+      Left = 983
+      Top = 17
+      Width = 125
       Height = 49
       Anchors = [akRight]
+      BevelOuter = bvNone
       Caption = 'Administrar'
-      Color = clWhite
+      Color = clPurple
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clPurple
-      Font.Height = -29
+      Font.Color = clWhite
+      Font.Height = -40
       Font.Name = 'Jenna Sue'
       Font.Style = [fsBold]
       ParentBackground = False

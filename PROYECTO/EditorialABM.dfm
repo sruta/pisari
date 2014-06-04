@@ -27,7 +27,7 @@ object FEditorialABM: TFEditorialABM
     Height = 741
     Anchors = [akTop, akRight, akBottom]
     BevelOuter = bvNone
-    Color = clBackground
+    Color = 15390207
     ParentBackground = False
     TabOrder = 1
     object btnLibros: TSpeedButton
@@ -80,7 +80,7 @@ object FEditorialABM: TFEditorialABM
     Height = 713
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
-    Color = 14725088
+    Color = 15390207
     ParentBackground = False
     TabOrder = 0
     DesignSize = (
@@ -88,7 +88,7 @@ object FEditorialABM: TFEditorialABM
       713)
     object lbFiltro: TLabel
       AlignWithMargins = True
-      Left = 2
+      Left = 8
       Top = 644
       Width = 38
       Height = 16
@@ -113,6 +113,7 @@ object FEditorialABM: TFEditorialABM
       Font.Height = -13
       Font.Name = 'Lucida Sans'
       Font.Style = []
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -136,7 +137,7 @@ object FEditorialABM: TFEditorialABM
       Width = 417
       Height = 209
       Anchors = []
-      Color = clBackground
+      Color = 15390207
       ParentBackground = False
       TabOrder = 1
       Visible = False
@@ -186,6 +187,7 @@ object FEditorialABM: TFEditorialABM
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        OnKeyPress = dbeNombreKeyPress
       end
       object Button1: TButton
         Left = 16
@@ -229,6 +231,7 @@ object FEditorialABM: TFEditorialABM
       Anchors = [akLeft]
       TabOrder = 2
       OnChange = AProcesarExecute
+      OnKeyPress = dbeNombreKeyPress
     end
   end
   object pnlLefter: TPanel
@@ -238,16 +241,15 @@ object FEditorialABM: TFEditorialABM
     Height = 713
     Anchors = [akLeft, akTop, akBottom]
     BevelOuter = bvNone
-    Color = clBackground
+    Color = 14725088
     ParentBackground = False
     TabOrder = 2
-    ExplicitHeight = 741
     object shPosition: TShape
       Left = 17
       Top = 401
       Width = 137
       Height = 74
-      Brush.Color = 14725088
+      Brush.Color = 15390207
       Pen.Style = psClear
     end
     object SpeedButton3: TSpeedButton
@@ -262,6 +264,7 @@ object FEditorialABM: TFEditorialABM
       Font.Name = 'Lucida Sans'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
     end
     object btnAutores: TSpeedButton
       Left = 16
@@ -310,8 +313,8 @@ object FEditorialABM: TFEditorialABM
     SQL.Strings = (
       'INSERT INTO Editorial (Nombre)'
       'VALUES (:Nombre)')
-    Left = 312
-    Top = 640
+    Left = 352
+    Top = 48
     ParamData = <
       item
         DataType = ftString
@@ -336,13 +339,13 @@ object FEditorialABM: TFEditorialABM
       'delete from Editorial'
       'where'
       '  idEditorial = :OLD_idEditorial')
-    Left = 264
-    Top = 640
+    Left = 304
+    Top = 48
   end
   object dsEditorial: TDataSource
     DataSet = qEditorial
-    Left = 216
-    Top = 640
+    Left = 256
+    Top = 48
   end
   object qEditorial: TQuery
     DatabaseName = 'CookBook'
@@ -352,8 +355,8 @@ object FEditorialABM: TFEditorialABM
       'FROM Editorial'
       'WHERE (:Editorial = '#39#39')or(Nombre like '#39'%'#39' + :Editorial + '#39'%'#39')')
     UpdateObject = uEditorial
-    Left = 168
-    Top = 640
+    Left = 208
+    Top = 48
     ParamData = <
       item
         DataType = ftString
@@ -376,8 +379,8 @@ object FEditorialABM: TFEditorialABM
     end
   end
   object ActionList1: TActionList
-    Left = 120
-    Top = 640
+    Left = 160
+    Top = 48
     object AProcesar: TAction
       Caption = 'Procesar'
       ShortCut = 116

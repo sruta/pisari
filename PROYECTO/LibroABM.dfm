@@ -27,7 +27,7 @@ object FLibroABM: TFLibroABM
     Height = 741
     Anchors = [akTop, akRight, akBottom]
     BevelOuter = bvNone
-    Color = clBackground
+    Color = 15390207
     ParentBackground = False
     TabOrder = 1
     object btnLibros: TSpeedButton
@@ -77,7 +77,7 @@ object FLibroABM: TFLibroABM
     Height = 713
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
-    Color = 14725088
+    Color = 15390207
     ParentBackground = False
     TabOrder = 0
     DesignSize = (
@@ -205,7 +205,7 @@ object FLibroABM: TFLibroABM
       Width = 489
       Height = 369
       Anchors = []
-      Color = clBackground
+      Color = 15390207
       ParentBackground = False
       TabOrder = 1
       Visible = False

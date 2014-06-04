@@ -12,6 +12,7 @@ object FAutores: TFAutores
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIChild
+  Menu = MainMenu1
   OldCreateOrder = False
   Visible = True
   WindowState = wsMaximized
@@ -28,7 +29,7 @@ object FAutores: TFAutores
     Height = 741
     Anchors = [akTop, akRight, akBottom]
     BevelOuter = bvNone
-    Color = clBackground
+    Color = 15390207
     ParentBackground = False
     TabOrder = 0
     object btnLibros: TSpeedButton
@@ -81,7 +82,7 @@ object FAutores: TFAutores
     Height = 713
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
-    Color = 14725088
+    Color = 15390207
     ParentBackground = False
     TabOrder = 1
     DesignSize = (
@@ -89,7 +90,7 @@ object FAutores: TFAutores
       713)
     object lbFiltro: TLabel
       AlignWithMargins = True
-      Left = 2
+      Left = 8
       Top = 644
       Width = 38
       Height = 16
@@ -114,6 +115,7 @@ object FAutores: TFAutores
       Font.Height = -13
       Font.Name = 'Lucida Sans'
       Font.Style = []
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -137,7 +139,7 @@ object FAutores: TFAutores
       Width = 417
       Height = 209
       Anchors = []
-      Color = clBackground
+      Color = 15390207
       ParentBackground = False
       TabOrder = 1
       Visible = False
@@ -231,6 +233,7 @@ object FAutores: TFAutores
       Anchors = [akLeft]
       TabOrder = 2
       OnChange = edFiltrarChange
+      OnKeyPress = dbeNombreKeyPress
     end
   end
   object pnlLefter: TPanel
@@ -240,16 +243,15 @@ object FAutores: TFAutores
     Height = 713
     Anchors = [akLeft, akTop, akBottom]
     BevelOuter = bvNone
-    Color = clBackground
+    Color = 14725088
     ParentBackground = False
     TabOrder = 2
-    ExplicitHeight = 741
     object shPosition: TShape
       Left = 17
       Top = 297
       Width = 137
       Height = 74
-      Brush.Color = 14725088
+      Brush.Color = 15390207
       Pen.Style = psClear
     end
     object SpeedButton3: TSpeedButton
@@ -264,6 +266,7 @@ object FAutores: TFAutores
       Font.Name = 'Lucida Sans'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
     end
     object btnAutores: TSpeedButton
       Left = 16
@@ -315,8 +318,8 @@ object FAutores: TFAutores
       'FROM Autor'
       'WHERE (:Autor = '#39#39')or(Nombre like '#39'%'#39' + :Autor + '#39'%'#39')')
     UpdateObject = uAutor
-    Left = 168
-    Top = 640
+    Left = 208
+    Top = 16
     ParamData = <
       item
         DataType = ftString
@@ -340,8 +343,8 @@ object FAutores: TFAutores
   end
   object dsAutor: TDataSource
     DataSet = qAutor
-    Left = 216
-    Top = 640
+    Left = 256
+    Top = 16
   end
   object uAutor: TUpdateSQL
     ModifySQL.Strings = (
@@ -360,16 +363,16 @@ object FAutores: TFAutores
       'delete from Autor'
       'where'
       '  idAutor = :OLD_idAutor')
-    Left = 264
-    Top = 640
+    Left = 304
+    Top = 16
   end
   object qNuevoAutor: TQuery
     DatabaseName = 'CookBook'
     SQL.Strings = (
       'INSERT INTO Autor (Nombre)'
       'VALUES (:Nombre)')
-    Left = 328
-    Top = 640
+    Left = 368
+    Top = 16
     ParamData = <
       item
         DataType = ftString
@@ -378,8 +381,8 @@ object FAutores: TFAutores
       end>
   end
   object ActionList1: TActionList
-    Left = 120
-    Top = 640
+    Left = 160
+    Top = 16
     object AProcesar: TAction
       Caption = 'Procesar'
       ShortCut = 116
@@ -389,5 +392,9 @@ object FAutores: TFAutores
       Caption = 'Modificar'
       OnExecute = AModificarExecute
     end
+  end
+  object MainMenu1: TMainMenu
+    Left = 392
+    Top = 640
   end
 end

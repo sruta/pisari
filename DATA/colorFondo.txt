@@ -1,1 +1,2 @@
-$00E0AFE0
+pnlLeft:  $00E0AFE0
+panel1:   $00EAD5FF

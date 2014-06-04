@@ -49,6 +49,8 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure btnAutoresClick(Sender: TObject);
     procedure btnEditorialesClick(Sender: TObject);
+    procedure dbeNombreKeyPress(Sender: TObject; var Key: Char);
+
   private
     { Private declarations }
     _Modo: char;
@@ -102,7 +104,10 @@ begin
       qNuevoIdioma.ExecSQL;
       qIdioma.Close;
       qIdioma.Open;
-    end;
+    end
+    else
+      if(_Modo='M')then
+        qIdioma.Post;
     panelHide;
   end
   else
@@ -112,6 +117,11 @@ end;
 procedure TFIdiomasABM.Button2Click(Sender: TObject);
 begin
   panelHide;
+end;
+
+procedure TFIdiomasABM.dbeNombreKeyPress(Sender: TObject; var Key: Char);
+begin
+  if ((NOT (UpCase(Key) in ['A'..'Z'])) and (Key <> #8) and (Key <> #13) and (Key <> #32)) then Key := #0;
 end;
 
 procedure TFIdiomasABM.DBGrid1DblClick(Sender: TObject);
@@ -152,8 +162,6 @@ begin
   DBGrid1.Enabled := True;
 
   pnlDatos.Hide;
-  if(_Modo='M')then
-    qIdioma.Post;
   AProcesarExecute(Self);
 end;
 
@@ -163,6 +171,7 @@ begin
   edFiltrar.Enabled := false;
   Panel1.Enabled := false;
   DBGrid1.Enabled := false;
+  dbeNombre.SetFocus;
 
   if (_Modo = 'A') then
     qIdioma.Insert
