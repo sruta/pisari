@@ -125,7 +125,7 @@ begin
     else
       ShowMessage('Debe tipear un nombre para el nuevo idioma');
  Except
-    Showmessage('No se aceptan Nombres de autor repetidos');
+    Showmessage('No se aceptan Nombres de Idioma repetidos');
   end;
 end;
 

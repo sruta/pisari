@@ -132,7 +132,7 @@ begin
   else
     ShowMessage('Debe tipear un nombre para la nueva editorial');
  Except
-    Showmessage('No se aceptan Nombres de autor repetidos');
+    Showmessage('No se aceptan Nombres de Editorial repetidos');
   end;
 end;
 
