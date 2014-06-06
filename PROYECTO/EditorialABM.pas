@@ -8,6 +8,7 @@ uses
   Buttons, ExtCtrls;
 
 type
+  TFMDI = class of TForm;
   TFEditorialABM = class(TForm)
     Panel2: TPanel;
     lbFiltro: TLabel;
@@ -52,9 +53,12 @@ type
     procedure dbeNombreKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
+    _VentanaActiva:TForm;
     _Modo: char;
     procedure panelShow;
     procedure panelHide;
+    procedure abrirVentanaMDI(Tipo:TFMDI);
+    procedure EnterComoTab(Sender: TObject; var Key: Char);
   public
     { Public declarations }
   end;
@@ -67,6 +71,13 @@ implementation
 uses Autores, IdiomasABM, Principal;
 
 {$R *.dfm}
+
+procedure TFEditorialABM.abrirVentanaMDI(Tipo:TFMDI);
+begin
+  if(_VentanaActiva<>nil)then
+    _VentanaActiva.Close;
+  _VentanaActiva:=Tipo.Create(Self);
+end;
 
 procedure TFEditorialABM.AModificarExecute(Sender: TObject);
 begin
@@ -84,12 +95,12 @@ end;
 
 procedure TFEditorialABM.btnAutoresClick(Sender: TObject);
 begin
-  FAutores:=TFAutores.Create(Self);
+  abrirVentanaMDI(TFAutores);
 end;
 
 procedure TFEditorialABM.btnIdiomasClick(Sender: TObject);
 begin
-  FIdiomasABM:=TFIdiomasABM.Create(Self);
+  abrirVentanaMDI(TFIdiomasABM);
 end;
 
 procedure TFEditorialABM.btnLibrosClick(Sender: TObject);
@@ -102,6 +113,7 @@ end;
 
 procedure TFEditorialABM.Button1Click(Sender: TObject);
 begin
+  try
   if (dbeNombre.Text <> '') then
   begin
     if (_Modo = 'A') then
@@ -119,6 +131,9 @@ begin
   end
   else
     ShowMessage('Debe tipear un nombre para la nueva editorial');
+ Except
+    Showmessage('No se aceptan Nombres de autor repetidos');
+  end;
 end;
 
 procedure TFEditorialABM.Button2Click(Sender: TObject);
@@ -126,9 +141,21 @@ begin
   panelHide;
 end;
 
+procedure TFEditorialABM.EnterComoTab(Sender: TObject; var Key: Char);
+{ENTER COMO TAB}
+begin
+  if (key = #13) then
+  begin
+    key:=#0;
+    Perform(WM_NEXTDLGCTL,0,0);
+  end;
+end;
+
 procedure TFEditorialABM.dbeNombreKeyPress(Sender: TObject; var Key: Char);
 begin
-  if ((NOT (UpCase(Key) in ['A'..'Z'])) and (Key <> #8) and (Key <> #13) and (Key <> #32)) then Key := #0;
+  if ((not(CharInSet(UpCase(Key), ['A'..'Z'])) and (not(CharInSet(key, [#8,#13,#32,#225,#233,#237,#243,#250])))))then
+    Key := #0;
+  EnterComoTab(Self, Key);
 end;
 
 procedure TFEditorialABM.DBGrid1DblClick(Sender: TObject);
@@ -177,5 +204,7 @@ begin
       mtInformation, mbOKCancel, 0) = mrOk) then
     qEditorial.Delete;
 end;
+
+
 
 end.

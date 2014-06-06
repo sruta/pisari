@@ -8,6 +8,7 @@ uses
   DBGrids, ExtCtrls, ComCtrls;
 
 type
+  TFMDI = class of TForm;
   TFLibroABM = class(TForm)
     Panel2: TPanel;
     lbFiltro: TLabel;
@@ -65,9 +66,17 @@ type
     qLibroIdioma: TStringField;
     qLibroEditorial: TStringField;
     dbmSinopsis: TDBMemo;
+    DBMemo1: TDBMemo;
+    imgLibro: TImage;
     procedure FormCreate(Sender: TObject);
+    procedure AProcesarExecute(Sender: TObject);
   private
     { Private declarations }
+    _Modo: char;
+    _VentanaActiva:TForm;
+    procedure panelHide;
+    procedure panelShow;
+    procedure abrirVentanaMDI(Tipo:TFMDI);
   public
     { Public declarations }
   end;
@@ -79,9 +88,48 @@ implementation
 
 {$R *.dfm}
 
+procedure TFLibroABM.abrirVentanaMDI(Tipo:TFMDI);
+begin
+  if(_VentanaActiva<>nil)then
+    _VentanaActiva.Close;
+  _VentanaActiva:=Tipo.Create(Self);
+end;
+
+procedure TFLibroABM.AProcesarExecute(Sender: TObject);
+begin
+  qLibro.Close;
+//  qLibro.ParamByName('Idioma').AsString := edFiltrar.Text;
+  qLibro.Open;
+end;
+
 procedure TFLibroABM.FormCreate(Sender: TObject);
 begin
   qEditorial.Open;
+end;
+
+procedure TFLibroABM.panelHide;
+begin
+  edFiltrar.Enabled := True;
+  Panel1.Enabled := True;
+  DBGrid1.Enabled := True;
+
+  pnlDatos.Hide;
+  AProcesarExecute(Self);
+end;
+
+procedure TFLibroABM.panelShow;
+begin
+  pnlDatos.Show;
+  edFiltrar.Enabled := false;
+  Panel1.Enabled := false;
+  DBGrid1.Enabled := false;
+  dbeNombre.SetFocus;
+  imgLibro.Picture.LoadFromFile(qLibro['foto']);
+
+  if (_Modo = 'A') then
+    qIdioma.Insert
+  else if (_Modo = 'M') then
+    qIdioma.Edit;
 end;
 
 end.

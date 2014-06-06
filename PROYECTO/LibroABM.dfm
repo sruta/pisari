@@ -182,6 +182,7 @@ object FLibroABM: TFLibroABM
       Top = 182
       Width = 159
       Height = 188
+      Anchors = [akTop, akRight]
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -194,6 +195,7 @@ object FLibroABM: TFLibroABM
       Top = 376
       Width = 160
       Height = 223
+      Anchors = [akTop, akRight, akBottom]
       DataField = 'sinopsis'
       DataSource = dsLibro
       TabOrder = 4
@@ -467,10 +469,28 @@ object FLibroABM: TFLibroABM
         object TabSheet1: TTabSheet
           Caption = 'Sinopsis'
           ImageIndex = 1
+          object DBMemo1: TDBMemo
+            Left = 16
+            Top = 24
+            Width = 417
+            Height = 201
+            DataField = 'sinopsis'
+            DataSource = dsLibro
+            TabOrder = 0
+          end
         end
         object TabSheet2: TTabSheet
           Caption = 'Foto'
           ImageIndex = 2
+          object imgLibro: TImage
+            Left = 48
+            Top = 24
+            Width = 353
+            Height = 201
+            Proportional = True
+            Stretch = True
+            Transparent = True
+          end
         end
         object Sinopsis: TTabSheet
           Caption = 'Autores'
@@ -485,6 +505,7 @@ object FLibroABM: TFLibroABM
     object AProcesar: TAction
       Caption = 'Procesar'
       ShortCut = 116
+      OnExecute = AProcesarExecute
     end
     object AModificar: TAction
       Caption = 'Modificar'

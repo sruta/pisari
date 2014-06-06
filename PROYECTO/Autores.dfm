@@ -3,7 +3,7 @@ object FAutores: TFAutores
   Top = 0
   Anchors = [akLeft, akTop, akRight, akBottom]
   Caption = 'FAutores'
-  ClientHeight = 713
+  ClientHeight = 733
   ClientWidth = 1022
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,14 +19,14 @@ object FAutores: TFAutores
   OnCreate = FormCreate
   DesignSize = (
     1022
-    713)
+    733)
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 870
     Top = -28
     Width = 153
-    Height = 741
+    Height = 761
     Anchors = [akTop, akRight, akBottom]
     BevelOuter = bvNone
     Color = 15390207
@@ -79,7 +79,7 @@ object FAutores: TFAutores
     Left = 152
     Top = 0
     Width = 728
-    Height = 713
+    Height = 733
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     Color = 15390207
@@ -87,11 +87,11 @@ object FAutores: TFAutores
     TabOrder = 1
     DesignSize = (
       728
-      713)
+      733)
     object lbFiltro: TLabel
       AlignWithMargins = True
       Left = 8
-      Top = 644
+      Top = 662
       Width = 38
       Height = 16
       Anchors = [akLeft]
@@ -102,12 +102,13 @@ object FAutores: TFAutores
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ExplicitTop = 644
     end
     object DBGrid1: TDBGrid
       Left = 8
       Top = 182
       Width = 714
-      Height = 417
+      Height = 437
       Anchors = [akLeft, akTop, akRight, akBottom]
       DataSource = dsAutor
       Font.Charset = DEFAULT_CHARSET
@@ -135,7 +136,7 @@ object FAutores: TFAutores
     object pnlDatos: TPanel
       AlignWithMargins = True
       Left = 160
-      Top = 304
+      Top = 315
       Width = 417
       Height = 209
       Anchors = []
@@ -227,7 +228,7 @@ object FAutores: TFAutores
     object edFiltrar: TEdit
       AlignWithMargins = True
       Left = 52
-      Top = 643
+      Top = 661
       Width = 510
       Height = 21
       Anchors = [akLeft]
@@ -240,7 +241,7 @@ object FAutores: TFAutores
     Left = 0
     Top = 0
     Width = 153
-    Height = 713
+    Height = 733
     Anchors = [akLeft, akTop, akBottom]
     BevelOuter = bvNone
     Color = 14725088

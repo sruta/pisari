@@ -65,6 +65,13 @@
 			<DCCReference Include="LibroABM.pas">
 				<Form>FLibroABM</Form>
 			</DCCReference>
+			<DCCReference Include="Unit2.pas">
+				<Form>Form2</Form>
+			</DCCReference>
+			<DCCReference Include="MDIGenerico.pas">
+				<Form>FMDIGenerico</Form>
+			</DCCReference>
+			<DCCReference Include="Funciones.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

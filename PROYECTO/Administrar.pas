@@ -7,6 +7,7 @@ uses
   Dialogs, ExtCtrls, Buttons;
 
 type
+  TFMDI = class of TForm;
   TFAdministrar = class(TForm)
     pnlLefter: TPanel;
     btnLibros: TSpeedButton;
@@ -19,6 +20,8 @@ type
     procedure btnIdiomasClick(Sender: TObject);
   private
     { Private declarations }
+    _VentanaActiva:TForm;
+    procedure abrirVentanaMDI(Tipo:TFMDI);
   public
     { Public declarations }
   end;
@@ -32,19 +35,26 @@ uses Principal, Autores, EditorialABM, IdiomasABM;
 
 {$R *.dfm}
 
+procedure TFAdministrar.abrirVentanaMDI(Tipo:TFMDI);
+begin
+  if(_VentanaActiva<>nil)then
+    _VentanaActiva.Close;
+  _VentanaActiva:=Tipo.Create(Self);
+end;
+
 procedure TFAdministrar.btnAutoresClick(Sender: TObject);
 begin
-  FAutores:=TFAutores.Create(Self);
+  abrirVentanaMDI(TFAutores);
 end;
 
 procedure TFAdministrar.btnEditorialesClick(Sender: TObject);
 begin
-  FEditorialABM:=TFEditorialABM.Create(Self);
+  abrirVentanaMDI(TFEditorialABM);
 end;
 
 procedure TFAdministrar.btnIdiomasClick(Sender: TObject);
 begin
-  FIdiomasABM:=TFIdiomasABM.Create(Self);
+  abrirVentanaMDI(TFIdiomasABM);
 end;
 
 

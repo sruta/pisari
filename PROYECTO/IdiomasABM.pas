@@ -8,6 +8,7 @@ uses
   DBTables, ActnList;
 
 type
+  TFMDI = class of TForm;
   TFIdiomasABM = class(TForm)
     Panel2: TPanel;
     lbFiltro: TLabel;
@@ -54,8 +55,11 @@ type
   private
     { Private declarations }
     _Modo: char;
+    _VentanaActiva:TForm;
     procedure panelShow;
     procedure panelHide;
+    procedure abrirVentanaMDI(Tipo:TFMDI);
+    procedure EnterComoTab(Sender: TObject; var Key: Char);
   public
     { Public declarations }
   end;
@@ -68,6 +72,13 @@ implementation
 uses Principal, Autores, EditorialABM;
 
 {$R *.dfm}
+
+procedure TFIdiomasABM.abrirVentanaMDI(Tipo:TFMDI);
+begin
+  if(_VentanaActiva<>nil)then
+    _VentanaActiva.Close;
+  _VentanaActiva:=Tipo.Create(Self);
+end;
 
 procedure TFIdiomasABM.AModificarExecute(Sender: TObject);
 begin
@@ -85,33 +96,37 @@ end;
 
 procedure TFIdiomasABM.btnAutoresClick(Sender: TObject);
 begin
-  FAutores:=TFAutores.Create(Self);
+  abrirVentanaMDI(TFAutores);
 end;
 
 procedure TFIdiomasABM.btnEditorialesClick(Sender: TObject);
 begin
-  FEditorialABM:=TFEditorialABM.Create(Self);
+  abrirVentanaMDI(TFEditorialABM);
 end;
 
 procedure TFIdiomasABM.Button1Click(Sender: TObject);
 begin
-  if (dbeNombre.Text <> '') then
-  begin
-    if (_Modo = 'A') then
+  try
+    if (dbeNombre.Text <> '') then
     begin
-      qNuevoIdioma.Close;
-      qNuevoIdioma.ParamByName('Descripcion').AsString := dbeNombre.Text;
-      qNuevoIdioma.ExecSQL;
-      qIdioma.Close;
-      qIdioma.Open;
+      if (_Modo = 'A') then
+      begin
+        qNuevoIdioma.Close;
+        qNuevoIdioma.ParamByName('Descripcion').AsString := dbeNombre.Text;
+        qNuevoIdioma.ExecSQL;
+        qIdioma.Close;
+        qIdioma.Open;
+      end
+      else
+        if(_Modo='M')then
+          qIdioma.Post;
+      panelHide;
     end
     else
-      if(_Modo='M')then
-        qIdioma.Post;
-    panelHide;
-  end
-  else
-    ShowMessage('Debe tipear un nombre para el nuevo idioma');
+      ShowMessage('Debe tipear un nombre para el nuevo idioma');
+ Except
+    Showmessage('No se aceptan Nombres de autor repetidos');
+  end;
 end;
 
 procedure TFIdiomasABM.Button2Click(Sender: TObject);
@@ -119,9 +134,21 @@ begin
   panelHide;
 end;
 
+procedure TFIdiomasABM.EnterComoTab(Sender: TObject; var Key: Char);
+{ENTER COMO TAB}
+begin
+  if (key = #13) then
+  begin
+    key:=#0;
+    Perform(WM_NEXTDLGCTL,0,0);
+  end;
+end;
+
 procedure TFIdiomasABM.dbeNombreKeyPress(Sender: TObject; var Key: Char);
 begin
-  if ((NOT (UpCase(Key) in ['A'..'Z'])) and (Key <> #8) and (Key <> #13) and (Key <> #32)) then Key := #0;
+  if ((not(CharInSet(UpCase(Key), ['A'..'Z'])) and (not(CharInSet(key, [#8,#13,#32,#225,#233,#237,#243,#250])))))then
+    Key := #0;
+  EnterComoTab(Self, Key);
 end;
 
 procedure TFIdiomasABM.DBGrid1DblClick(Sender: TObject);

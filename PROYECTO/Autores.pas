@@ -8,6 +8,7 @@ uses
   DBCtrls, ActnList, Menus;
 
 type
+  TFMDI = class of TForm;
   TFAutores = class(TForm)
     Panel1: TPanel;
     btnLibros: TSpeedButton;
@@ -55,8 +56,11 @@ type
   private
     { Private declarations }
     _Modo: char;
+    _VentanaActiva:TForm;
     procedure panelShow;
     procedure panelHide;
+    procedure abrirVentanaMDI(Tipo:TFMDI);
+    procedure EnterComoTab(Sender: TObject; var Key: Char);
   public
     { Public declarations }
   end;
@@ -66,9 +70,26 @@ var
 
 implementation
 
-uses EditorialABM, IdiomasABM, Principal;
+uses EditorialABM, IdiomasABM, Principal, Funciones;
 
 {$R *.dfm}
+
+procedure TFAutores.abrirVentanaMDI(Tipo:TFMDI);
+begin
+  if(_VentanaActiva<>nil)then
+    _VentanaActiva.Close;
+  _VentanaActiva:=Tipo.Create(Self);
+end;
+
+procedure TFAutores.EnterComoTab(Sender: TObject; var Key: Char);
+{ENTER COMO TAB}
+begin
+  if (key = #13) then
+  begin
+    key:=#0;
+    Perform(WM_NEXTDLGCTL,0,0);
+  end;
+end;
 
 procedure TFAutores.AModificarExecute(Sender: TObject);
 begin
@@ -86,12 +107,12 @@ end;
 
 procedure TFAutores.btnEditorialesClick(Sender: TObject);
 begin
-    FEditorialABM:=TFEditorialABM.Create(Self);
+  abrirVentanaMDI(TFEditorialABM);
 end;
 
 procedure TFAutores.btnIdiomasClick(Sender: TObject);
 begin
-  FIdiomasABM:=TFIdiomasABM.Create(Self);
+  abrirVentanaMDI(TFIdiomasABM);
 end;
 
 procedure TFAutores.btnLibrosClick(Sender: TObject);
@@ -104,23 +125,27 @@ end;
 
 procedure TFAutores.Button1Click(Sender: TObject);
 begin
-  if (dbeNombre.Text <> '') then
-  begin
-    if (_Modo = 'A') then
+  try
+    if (dbeNombre.Text <> '') then
     begin
-      qNuevoAutor.Close;
-      qNuevoAutor.ParamByName('Nombre').AsString := dbeNombre.Text;
-      qNuevoAutor.ExecSQL;
-      qAutor.Close;
-      qAutor.Open;
+      if (_Modo = 'A') then
+      begin
+        qNuevoAutor.Close;
+        qNuevoAutor.ParamByName('Nombre').AsString := dbeNombre.Text;
+        qNuevoAutor.ExecSQL;
+        qAutor.Close;
+        qAutor.Open;
+      end
+      else
+        if(_Modo='M')then
+          qAutor.Post;
+      panelHide;
     end
     else
-      if(_Modo='M')then
-        qAutor.Post;
-    panelHide;
-  end
-  else
-    ShowMessage('Debe tipear un nombre para el nuevo autor');
+      ShowMessage('Debe tipear un nombre para el nuevo autor');
+  Except
+    Showmessage('No se aceptan Nombres de autor repetidos');
+  end;
 end;
 
 procedure TFAutores.Button2Click(Sender: TObject);
@@ -130,7 +155,9 @@ end;
 
 procedure TFAutores.dbeNombreKeyPress(Sender: TObject; var Key: Char);
 begin
-   if ((NOT (UpCase(Key) in ['A'..'Z'])) and (Key <> #8) and (Key <> #13) and (Key <> #32)) then Key := #0;
+  if ((not(CharInSet(UpCase(Key), ['A'..'Z'])) and (not(CharInSet(key, [#8,#13,#32,#225,#233,#237,#243,#250])))))then
+    Key := #0;
+  EnterComoTab(Self, Key);
 end;
 
 procedure TFAutores.DBGrid1DblClick(Sender: TObject);

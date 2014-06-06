@@ -4,9 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, jpeg, ExtCtrls, pngimage;
+  Dialogs, StdCtrls, jpeg, ExtCtrls, pngimage, MDIGenerico;
 
 type
+  TFMDI = class of TForm;// TFMDIGenerico;
   TFPrincipal = class(TForm)
     pnlHeader: TPanel;
     Edit1: TEdit;
@@ -20,8 +21,8 @@ type
 
   private
     { Private declarations }
-    _VentanaActiva:TForm;
-    procedure abrirVentanaMDI(Form:TForm);
+    _VentanaActiva:TForm;//TFMDIGenerico;
+    procedure abrirVentanaMDI(Tipo:TFMDI);
   public
     { Public declarations }
   end;
@@ -39,15 +40,14 @@ uses Administrar;
 procedure TFPrincipal.pnlAdministrarClick(Sender: TObject);
 begin
   lbPosicion.Caption:='Administrar';
-  FAdministrar:=TFAdministrar.Create(Self);
+  abrirVentanaMDI(TFAdministrar);
 end;
 
-procedure TFPrincipal.abrirVentanaMDI(Form:TForm);
+procedure TFPrincipal.abrirVentanaMDI(Tipo:TFMDI);
 begin
   if(_VentanaActiva<>nil)then
     _VentanaActiva.Close;
-  _VentanaActiva:=Form;
-// Averiguar
+  _VentanaActiva:=Tipo.Create(Self);
 end;
 
 end.
