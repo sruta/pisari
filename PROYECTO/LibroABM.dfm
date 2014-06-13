@@ -42,6 +42,7 @@ object FLibroABM: TFLibroABM
       Font.Name = 'Lucida Sans'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = btnLibrosClick
     end
     object SpeedButton1: TSpeedButton
       Left = 21
@@ -55,6 +56,7 @@ object FLibroABM: TFLibroABM
       Font.Name = 'Lucida Sans'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = SpeedButton1Click
     end
     object SpeedButton2: TSpeedButton
       Left = 21
@@ -68,10 +70,11 @@ object FLibroABM: TFLibroABM
       Font.Name = 'Lucida Sans'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = SpeedButton2Click
     end
   end
   object Panel2: TPanel
-    Left = 152
+    Left = 153
     Top = 0
     Width = 728
     Height = 713
@@ -176,6 +179,8 @@ object FLibroABM: TFLibroABM
       Height = 21
       Anchors = [akLeft]
       TabOrder = 2
+      OnChange = edFiltrarChange
+      OnKeyPress = dbeNombreKeyPress
     end
     object DBGrid2: TDBGrid
       Left = 561
@@ -244,6 +249,7 @@ object FLibroABM: TFLibroABM
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        OnClick = Button1Click
       end
       object Button2: TButton
         Left = 408
@@ -259,6 +265,7 @@ object FLibroABM: TFLibroABM
         Font.Style = []
         ParentFont = False
         TabOrder = 2
+        OnClick = Button2Click
       end
       object PageControl1: TPageControl
         Left = 16
@@ -365,7 +372,8 @@ object FLibroABM: TFLibroABM
             Top = 20
             Width = 268
             Height = 22
-            DataField = 'nombre'
+            DataField = 'titulo'
+            DataSource = dsLibro
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -373,12 +381,15 @@ object FLibroABM: TFLibroABM
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            OnKeyPress = dbeNombreKeyPress
           end
           object dbeISBN: TDBEdit
             Left = 167
             Top = 48
             Width = 268
             Height = 22
+            DataField = 'isbn'
+            DataSource = dsLibro
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -387,12 +398,15 @@ object FLibroABM: TFLibroABM
             MaxLength = 13
             ParentFont = False
             TabOrder = 1
+            OnKeyPress = dbeNombreKeyPress
           end
           object dbeHojas: TDBEdit
             Left = 167
             Top = 76
             Width = 268
             Height = 22
+            DataField = 'cantPaginas'
+            DataSource = dsLibro
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -400,12 +414,15 @@ object FLibroABM: TFLibroABM
             Font.Style = []
             ParentFont = False
             TabOrder = 2
+            OnKeyPress = dbeNombreKeyPress
           end
           object dbePrecio: TDBEdit
             Left = 167
             Top = 104
             Width = 268
             Height = 22
+            DataField = 'precio'
+            DataSource = dsLibro
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -413,6 +430,7 @@ object FLibroABM: TFLibroABM
             Font.Style = []
             ParentFont = False
             TabOrder = 3
+            OnKeyPress = dbeNombreKeyPress
           end
           object dblEditorial: TDBLookupComboBox
             Left = 167
@@ -431,6 +449,7 @@ object FLibroABM: TFLibroABM
             ListSource = dsEditorial
             ParentFont = False
             TabOrder = 4
+            OnKeyPress = dbeNombreKeyPress
           end
           object dblIdioma: TDBLookupComboBox
             Left = 168
@@ -448,9 +467,10 @@ object FLibroABM: TFLibroABM
             ListField = 'descripcion'
             ListSource = dsIdioma
             ParentFont = False
-            TabOrder = 5
+            TabOrder = 6
+            OnKeyPress = dbeNombreKeyPress
           end
-          object DateTimePicker1: TDateTimePicker
+          object dtpFecha: TDateTimePicker
             Left = 167
             Top = 160
             Width = 268
@@ -463,7 +483,8 @@ object FLibroABM: TFLibroABM
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 6
+            TabOrder = 5
+            OnKeyPress = dbeNombreKeyPress
           end
         end
         object TabSheet1: TTabSheet
@@ -499,8 +520,83 @@ object FLibroABM: TFLibroABM
       end
     end
   end
+  object pnlLefter: TPanel
+    Left = 0
+    Top = -60
+    Width = 153
+    Height = 773
+    Anchors = [akLeft, akTop, akBottom]
+    BevelOuter = bvNone
+    Color = 14725088
+    ParentBackground = False
+    TabOrder = 2
+    object shPosition: TShape
+      Left = 17
+      Top = 257
+      Width = 137
+      Height = 74
+      Brush.Color = 15390207
+      Pen.Style = psClear
+    end
+    object SpeedButton3: TSpeedButton
+      Left = 16
+      Top = 256
+      Width = 120
+      Height = 75
+      Caption = 'Libros'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Visible = False
+    end
+    object btnAutores: TSpeedButton
+      Left = 16
+      Top = 360
+      Width = 120
+      Height = 75
+      Caption = 'Autores'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnAutoresClick
+    end
+    object btnEditoriales: TSpeedButton
+      Left = 16
+      Top = 464
+      Width = 120
+      Height = 75
+      Caption = 'Editoriales'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnEditorialesClick
+    end
+    object btnIdiomas: TSpeedButton
+      Left = 16
+      Top = 568
+      Width = 120
+      Height = 75
+      Caption = 'Idiomas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Lucida Sans'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnIdiomasClick
+    end
+  end
   object ActionList1: TActionList
-    Left = 120
+    Left = 976
     Top = 640
     object AProcesar: TAction
       Caption = 'Procesar'
@@ -509,109 +605,85 @@ object FLibroABM: TFLibroABM
     end
     object AModificar: TAction
       Caption = 'Modificar'
+      OnExecute = AModificarExecute
     end
   end
   object dsLibro: TDataSource
     DataSet = qLibro
-    Left = 216
-    Top = 640
+    Left = 720
+    Top = 672
   end
   object uLibro: TUpdateSQL
     ModifySQL.Strings = (
-      'update Autor'
+      'update Libro'
       'set'
-      '  idAutor = :idAutor,'
-      '  nombre = :nombre'
+      '  isbn = :isbn,'
+      '  titulo = :titulo,'
+      '  cantPaginas = :cantPaginas,'
+      '  precio = :precio,'
+      '  fecha = :fecha,'
+      '  idEditorial = :idEditorial,'
+      '  sinopsis = :sinopsis,'
+      '  foto = :foto,'
+      '  idIdioma = :idIdioma'
       'where'
-      '  idAutor = :OLD_idAutor')
+      '  idLibro = :OLD_idLibro')
     InsertSQL.Strings = (
-      'insert into Autor'
-      '  (nombre)'
+      'insert into Libro'
+      
+        '  (isbn, titulo, cantPaginas, precio, fecha, idEditorial, sinops' +
+        'is, foto, '
+      '   idIdioma)'
       'values'
-      '  (:nombre)')
+      
+        '  (:isbn, :titulo, :cantPaginas, :precio, :fecha, :idEditorial, ' +
+        ':sinopsis, '
+      '   :foto, :idIdioma)')
     DeleteSQL.Strings = (
-      'delete from Autor'
+      'delete from Libro'
       'where'
-      '  idAutor = :OLD_idAutor')
-    Left = 264
+      '  idLibro = :OLD_idLibro')
+    Left = 672
     Top = 640
-  end
-  object qNuevoLibro: TQuery
-    DatabaseName = 'CookBook'
-    SQL.Strings = (
-      
-        'INSERT INTO Libro (ISBN, titulo, cantPaginas, precio, Fecha, idE' +
-        'ditorial, sinopsis, foto, idIdioma)'
-      
-        'VALUES (:ISBN, :titulo, :cantPaginas, :precio, :Fecha, :idEditor' +
-        'ial, :sinopsis, :foto, :idIdioma)')
-    Left = 328
-    Top = 640
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'ISBN'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'titulo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cantPaginas'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'precio'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'Fecha'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'idEditorial'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'sinopsis'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'foto'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'idIdioma'
-        ParamType = ptUnknown
-      end>
   end
   object qEditorial: TQuery
     DatabaseName = 'CookBook'
+    RequestLive = True
     SQL.Strings = (
       'SELECT * FROM Editorial')
-    Left = 624
-    Top = 648
+    Left = 872
+    Top = 640
+    object qEditorialidEditorial: TIntegerField
+      FieldName = 'idEditorial'
+      Origin = 'COOKBOOK.Editorial.idEditorial'
+    end
+    object qEditorialNombre: TStringField
+      FieldName = 'Nombre'
+      Origin = 'COOKBOOK.Editorial.Nombre'
+      Size = 50
+    end
   end
   object qIdioma: TQuery
     DatabaseName = 'CookBook'
+    RequestLive = True
     SQL.Strings = (
       'SELECT * FROM Idioma')
-    Left = 488
-    Top = 672
+    Left = 800
+    Top = 640
+    object qIdiomaidIdioma: TIntegerField
+      FieldName = 'idIdioma'
+      Origin = 'COOKBOOK.Idioma.idIdioma'
+    end
+    object qIdiomadescripcion: TStringField
+      FieldName = 'descripcion'
+      Origin = 'COOKBOOK.Idioma.descripcion'
+      Size = 50
+    end
   end
   object dsEditorial: TDataSource
     DataSet = qEditorial
-    Left = 552
-    Top = 664
+    Left = 872
+    Top = 672
   end
   object dsIdioma: TDataSource
     DataSet = qIdioma
@@ -619,6 +691,7 @@ object FLibroABM: TFLibroABM
     Top = 672
   end
   object qLibro: TQuery
+    CachedUpdates = True
     DatabaseName = 'CookBook'
     SQL.Strings = (
       'SELECT L.*, I.Descripcion AS Idioma, E.Nombre AS Editorial'
@@ -628,8 +701,8 @@ object FLibroABM: TFLibroABM
       #9'INNER JOIN Editorial E ON (L.idEditorial = E.idEditorial)'
       'WHERE (:Titulo = '#39#39')or(L.Titulo like '#39'%'#39' + :Titulo + '#39'%'#39')')
     UpdateObject = uLibro
-    Left = 168
-    Top = 648
+    Left = 720
+    Top = 640
     ParamData = <
       item
         DataType = ftString
@@ -641,47 +714,5 @@ object FLibroABM: TFLibroABM
         Name = 'Titulo'
         ParamType = ptUnknown
       end>
-    object qLibroidLibro: TIntegerField
-      FieldName = 'idLibro'
-    end
-    object qLibroisbn: TIntegerField
-      FieldName = 'isbn'
-    end
-    object qLibrotitulo: TStringField
-      FieldName = 'titulo'
-      Size = 50
-    end
-    object qLibrocantPaginas: TIntegerField
-      FieldName = 'cantPaginas'
-    end
-    object qLibroprecio: TFloatField
-      FieldName = 'precio'
-    end
-    object qLibrofecha: TDateTimeField
-      FieldName = 'fecha'
-    end
-    object qLibroidEditorial: TIntegerField
-      FieldName = 'idEditorial'
-    end
-    object qLibrosinopsis: TMemoField
-      FieldName = 'sinopsis'
-      BlobType = ftMemo
-      Size = 1
-    end
-    object qLibrofoto: TStringField
-      FieldName = 'foto'
-      Size = 50
-    end
-    object qLibroidIdioma: TIntegerField
-      FieldName = 'idIdioma'
-    end
-    object qLibroIdioma: TStringField
-      FieldName = 'Idioma'
-      Size = 50
-    end
-    object qLibroEditorial: TStringField
-      FieldName = 'Editorial'
-      Size = 50
-    end
   end
 end

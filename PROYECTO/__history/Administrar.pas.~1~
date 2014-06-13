@@ -1,0 +1,51 @@
+unit Administrar;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, Buttons;
+
+type
+  TFAdministrar = class(TForm)
+    pnlLefter: TPanel;
+    btnLibros: TSpeedButton;
+    btnAutores: TSpeedButton;
+    btnEditoriales: TSpeedButton;
+    btnIdiomas: TSpeedButton;
+    Panel1: TPanel;
+    procedure btnAutoresClick(Sender: TObject);
+    procedure btnEditorialesClick(Sender: TObject);
+    procedure btnIdiomasClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FAdministrar: TFAdministrar;
+
+implementation
+
+uses Principal, Autores, EditorialABM, IdiomasABM;
+
+{$R *.dfm}
+
+procedure TFAdministrar.btnAutoresClick(Sender: TObject);
+begin
+  FAutores:=TFAutores.Create(Self);
+end;
+
+procedure TFAdministrar.btnEditorialesClick(Sender: TObject);
+begin
+  FEditorialABM:=TFEditorialABM.Create(Self);
+end;
+
+procedure TFAdministrar.btnIdiomasClick(Sender: TObject);
+begin
+  FIdiomasABM:=TFIdiomasABM.Create(Self);
+end;
+
+
+end.

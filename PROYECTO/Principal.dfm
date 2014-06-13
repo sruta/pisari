@@ -804,7 +804,6 @@ object FPrincipal: TFPrincipal
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      Visible = False
     end
     object pnlAdministrar: TPanel
       Left = 983

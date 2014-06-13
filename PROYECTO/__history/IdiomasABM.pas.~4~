@@ -32,12 +32,25 @@ type
     qNuevoIdioma: TQuery;
     qIdiomaidIdioma: TIntegerField;
     qIdiomadescripcion: TStringField;
+    pnlLefter: TPanel;
+    shPosition: TShape;
+    btnLibros: TSpeedButton;
+    btnAutores: TSpeedButton;
+    btnEditoriales: TSpeedButton;
+    btnIdiomas: TSpeedButton;
     procedure SpeedButton4Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure AProcesarExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnAutoresClick(Sender: TObject);
+    procedure btnEditorialesClick(Sender: TObject);
+    procedure dbeNombreKeyPress(Sender: TObject; var Key: Char);
+
   private
     { Private declarations }
     _Modo: char;
@@ -51,6 +64,8 @@ var
   FIdiomasABM: TFIdiomasABM;
 
 implementation
+
+uses Principal, Autores, EditorialABM;
 
 {$R *.dfm}
 
@@ -68,6 +83,16 @@ begin
   qIdioma.Open;
 end;
 
+procedure TFIdiomasABM.btnAutoresClick(Sender: TObject);
+begin
+  FAutores:=TFAutores.Create(Self);
+end;
+
+procedure TFIdiomasABM.btnEditorialesClick(Sender: TObject);
+begin
+  FEditorialABM:=TFEditorialABM.Create(Self);
+end;
+
 procedure TFIdiomasABM.Button1Click(Sender: TObject);
 begin
   if (dbeNombre.Text <> '') then
@@ -79,11 +104,35 @@ begin
       qNuevoIdioma.ExecSQL;
       qIdioma.Close;
       qIdioma.Open;
-    end;
+    end
+    else
+      if(_Modo='M')then
+        qIdioma.Post;
     panelHide;
   end
   else
     ShowMessage('Debe tipear un nombre para el nuevo idioma');
+end;
+
+procedure TFIdiomasABM.Button2Click(Sender: TObject);
+begin
+  panelHide;
+end;
+
+procedure TFIdiomasABM.dbeNombreKeyPress(Sender: TObject; var Key: Char);
+begin
+  if ((NOT (UpCase(Key) in ['A'..'Z']) and (Key <> #8) and (Key <> #13) and (Key <> #32)and(key <>#160)and(key <>#130)and(key <>#161)and(key <>#162)and(key <>#163)) then Key := #0;
+end;
+
+procedure TFIdiomasABM.DBGrid1DblClick(Sender: TObject);
+begin
+  AModificarExecute(Self);
+end;
+
+procedure TFIdiomasABM.FormCreate(Sender: TObject);
+begin
+  AProcesarExecute(Self);
+  FPrincipal.lbPosicion.Caption:='Administrar >> Idiomas'
 end;
 
 procedure TFIdiomasABM.SpeedButton4Click(Sender: TObject);
@@ -113,8 +162,6 @@ begin
   DBGrid1.Enabled := True;
 
   pnlDatos.Hide;
-  if(_Modo='M')then
-    qIdioma.Post;
   AProcesarExecute(Self);
 end;
 
@@ -124,6 +171,7 @@ begin
   edFiltrar.Enabled := false;
   Panel1.Enabled := false;
   DBGrid1.Enabled := false;
+  dbeNombre.SetFocus;
 
   if (_Modo = 'A') then
     qIdioma.Insert

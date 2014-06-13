@@ -24,7 +24,6 @@ type
     ActionList1: TActionList;
     AProcesar: TAction;
     AModificar: TAction;
-    qLibro: TQuery;
     dsLibro: TDataSource;
     uLibro: TUpdateSQL;
     qNuevoLibro: TQuery;
@@ -49,12 +48,31 @@ type
     dblIdioma: TDBLookupComboBox;
     DateTimePicker1: TDateTimePicker;
     qEditorial: TQuery;
-    Query2: TQuery;
+    qIdioma: TQuery;
     dsEditorial: TDataSource;
-    DataSource2: TDataSource;
+    dsIdioma: TDataSource;
+    qLibro: TQuery;
+    qLibroidLibro: TIntegerField;
+    qLibroisbn: TIntegerField;
+    qLibrotitulo: TStringField;
+    qLibrocantPaginas: TIntegerField;
+    qLibroprecio: TFloatField;
+    qLibrofecha: TDateTimeField;
+    qLibroidEditorial: TIntegerField;
+    qLibrosinopsis: TMemoField;
+    qLibrofoto: TStringField;
+    qLibroidIdioma: TIntegerField;
+    qLibroIdioma: TStringField;
+    qLibroEditorial: TStringField;
+    dbmSinopsis: TDBMemo;
+    DBMemo1: TDBMemo;
+    imgLibro: TImage;
     procedure FormCreate(Sender: TObject);
+    procedure AProcesarExecute(Sender: TObject);
   private
     { Private declarations }
+    procedure panelHide;
+    procedure panelShow;
   public
     { Public declarations }
   end;
@@ -66,9 +84,40 @@ implementation
 
 {$R *.dfm}
 
+procedure TFLibroABM.AProcesarExecute(Sender: TObject);
+begin
+  qLibro.Close;
+//  qLibro.ParamByName('Idioma').AsString := edFiltrar.Text;
+  qLibro.Open;
+end;
+
 procedure TFLibroABM.FormCreate(Sender: TObject);
 begin
   qEditorial.Open;
+end;
+
+procedure TFLibroABM.panelHide;
+begin
+  edFiltrar.Enabled := True;
+  Panel1.Enabled := True;
+  DBGrid1.Enabled := True;
+
+  pnlDatos.Hide;
+  AProcesarExecute(Self);
+end;
+
+procedure TFLibroABM.panelShow;
+begin
+  pnlDatos.Show;
+  edFiltrar.Enabled := false;
+  Panel1.Enabled := false;
+  DBGrid1.Enabled := false;
+  dbeNombre.SetFocus;
+
+  if (_Modo = 'A') then
+    qIdioma.Insert
+  else if (_Modo = 'M') then
+    qIdioma.Edit;
 end;
 
 end.

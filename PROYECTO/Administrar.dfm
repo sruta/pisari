@@ -48,7 +48,7 @@ object FAdministrar: TFAdministrar
       Font.Name = 'Lucida Sans'
       Font.Style = [fsBold]
       ParentFont = False
-      Visible = False
+      OnClick = btnLibrosClick
     end
     object btnAutores: TSpeedButton
       Left = 16

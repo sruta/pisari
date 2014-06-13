@@ -18,6 +18,7 @@ type
     procedure btnAutoresClick(Sender: TObject);
     procedure btnEditorialesClick(Sender: TObject);
     procedure btnIdiomasClick(Sender: TObject);
+    procedure btnLibrosClick(Sender: TObject);
   private
     { Private declarations }
     _VentanaActiva:TForm;
@@ -31,7 +32,7 @@ var
 
 implementation
 
-uses Principal, Autores, EditorialABM, IdiomasABM;
+uses Principal, Autores, EditorialABM, IdiomasABM, LibroABM;
 
 {$R *.dfm}
 
@@ -57,5 +58,10 @@ begin
   abrirVentanaMDI(TFIdiomasABM);
 end;
 
+
+procedure TFAdministrar.btnLibrosClick(Sender: TObject);
+begin
+  abrirVentanaMDI(TFLibroABM);
+end;
 
 end.

@@ -3,7 +3,7 @@ program CookBook;
 uses
   Forms,
   Principal in 'Principal.pas' {FPrincipal},
-  ModuloDatos in 'ModuloDatos.pas' {DataModule2: TDataModule},
+  ModuloDatos in 'ModuloDatos.pas' {DM: TDataModule},
   Administrar in 'Administrar.pas' {FAdministrar},
   Autores in 'Autores.pas' {FAutores},
   EditorialABM in 'EditorialABM.pas' {FEditorialABM},
@@ -19,6 +19,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFPrincipal, FPrincipal);
-  Application.CreateForm(TDataModule2, DataModule2);
+  Application.CreateForm(TDM, DM);
   Application.Run;
 end.

@@ -3,7 +3,7 @@ object FAutores: TFAutores
   Top = 0
   Anchors = [akLeft, akTop, akRight, akBottom]
   Caption = 'FAutores'
-  ClientHeight = 733
+  ClientHeight = 773
   ClientWidth = 1022
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,14 +19,14 @@ object FAutores: TFAutores
   OnCreate = FormCreate
   DesignSize = (
     1022
-    733)
+    773)
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 870
     Top = -28
     Width = 153
-    Height = 761
+    Height = 801
     Anchors = [akTop, akRight, akBottom]
     BevelOuter = bvNone
     Color = 15390207
@@ -79,7 +79,7 @@ object FAutores: TFAutores
     Left = 152
     Top = 0
     Width = 728
-    Height = 733
+    Height = 773
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     Color = 15390207
@@ -87,11 +87,11 @@ object FAutores: TFAutores
     TabOrder = 1
     DesignSize = (
       728
-      733)
+      773)
     object lbFiltro: TLabel
       AlignWithMargins = True
       Left = 8
-      Top = 662
+      Top = 698
       Width = 38
       Height = 16
       Anchors = [akLeft]
@@ -108,7 +108,7 @@ object FAutores: TFAutores
       Left = 8
       Top = 182
       Width = 714
-      Height = 437
+      Height = 477
       Anchors = [akLeft, akTop, akRight, akBottom]
       DataSource = dsAutor
       Font.Charset = DEFAULT_CHARSET
@@ -136,7 +136,7 @@ object FAutores: TFAutores
     object pnlDatos: TPanel
       AlignWithMargins = True
       Left = 160
-      Top = 315
+      Top = 337
       Width = 417
       Height = 209
       Anchors = []
@@ -228,7 +228,7 @@ object FAutores: TFAutores
     object edFiltrar: TEdit
       AlignWithMargins = True
       Left = 52
-      Top = 661
+      Top = 697
       Width = 510
       Height = 21
       Anchors = [akLeft]
@@ -241,7 +241,7 @@ object FAutores: TFAutores
     Left = 0
     Top = 0
     Width = 153
-    Height = 733
+    Height = 773
     Anchors = [akLeft, akTop, akBottom]
     BevelOuter = bvNone
     Color = 14725088

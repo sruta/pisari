@@ -47,7 +47,7 @@
 				<Form>FPrincipal</Form>
 			</DCCReference>
 			<DCCReference Include="ModuloDatos.pas">
-				<Form>DataModule2</Form>
+				<Form>DM</Form>
 				<DesignClass>TDataModule</DesignClass>
 			</DCCReference>
 			<DCCReference Include="Administrar.pas">

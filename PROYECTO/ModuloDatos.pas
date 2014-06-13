@@ -6,7 +6,7 @@ uses
   SysUtils, Classes, DB, DBTables;
 
 type
-  TDataModule2 = class(TDataModule)
+  TDM = class(TDataModule)
     CB: TDatabase;
   private
     { Private declarations }
@@ -15,7 +15,7 @@ type
   end;
 
 var
-  DataModule2: TDataModule2;
+  DM: TDM;
 
 implementation
 

@@ -8,6 +8,7 @@ uses
   DBTables, ActnList;
 
 type
+  TFMDI = class of TForm;
   TFIdiomasABM = class(TForm)
     Panel2: TPanel;
     lbFiltro: TLabel;
@@ -33,6 +34,7 @@ type
     qIdiomaidIdioma: TIntegerField;
     qIdiomadescripcion: TStringField;
     pnlLefter: TPanel;
+    shPosition: TShape;
     btnLibros: TSpeedButton;
     btnAutores: TSpeedButton;
     btnEditoriales: TSpeedButton;
@@ -45,11 +47,19 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnAutoresClick(Sender: TObject);
+    procedure btnEditorialesClick(Sender: TObject);
+    procedure dbeNombreKeyPress(Sender: TObject; var Key: Char);
+
   private
     { Private declarations }
     _Modo: char;
+    _VentanaActiva:TForm;
     procedure panelShow;
     procedure panelHide;
+    procedure abrirVentanaMDI(Tipo:TFMDI);
+    procedure EnterComoTab(Sender: TObject; var Key: Char);
   public
     { Public declarations }
   end;
@@ -59,7 +69,16 @@ var
 
 implementation
 
+uses Principal, Autores, EditorialABM;
+
 {$R *.dfm}
+
+procedure TFIdiomasABM.abrirVentanaMDI(Tipo:TFMDI);
+begin
+  if(_VentanaActiva<>nil)then
+    _VentanaActiva.Close;
+  _VentanaActiva:=Tipo.Create(Self);
+end;
 
 procedure TFIdiomasABM.AModificarExecute(Sender: TObject);
 begin
@@ -75,22 +94,39 @@ begin
   qIdioma.Open;
 end;
 
+procedure TFIdiomasABM.btnAutoresClick(Sender: TObject);
+begin
+  abrirVentanaMDI(TFAutores);
+end;
+
+procedure TFIdiomasABM.btnEditorialesClick(Sender: TObject);
+begin
+  abrirVentanaMDI(TFEditorialABM);
+end;
+
 procedure TFIdiomasABM.Button1Click(Sender: TObject);
 begin
-  if (dbeNombre.Text <> '') then
-  begin
-    if (_Modo = 'A') then
+  try
+    if (dbeNombre.Text <> '') then
     begin
-      qNuevoIdioma.Close;
-      qNuevoIdioma.ParamByName('Descripcion').AsString := dbeNombre.Text;
-      qNuevoIdioma.ExecSQL;
-      qIdioma.Close;
-      qIdioma.Open;
-    end;
-    panelHide;
-  end
-  else
-    ShowMessage('Debe tipear un nombre para el nuevo idioma');
+      if (_Modo = 'A') then
+      begin
+        qNuevoIdioma.Close;
+        qNuevoIdioma.ParamByName('Descripcion').AsString := dbeNombre.Text;
+        qNuevoIdioma.ExecSQL;
+        qIdioma.Close;
+        qIdioma.Open;
+      end
+      else
+        if(_Modo='M')then
+          qIdioma.Post;
+      panelHide;
+    end
+    else
+      ShowMessage('Debe tipear un nombre para el nuevo idioma');
+ Except
+    Showmessage('No se aceptan Nombres de autor repetidos');
+  end;
 end;
 
 procedure TFIdiomasABM.Button2Click(Sender: TObject);
@@ -98,9 +134,32 @@ begin
   panelHide;
 end;
 
+procedure TFIdiomasABM.EnterComoTab(Sender: TObject; var Key: Char);
+{ENTER COMO TAB}
+begin
+  if (key = #13) then
+  begin
+    key:=#0;
+    Perform(WM_NEXTDLGCTL,0,0);
+  end;
+end;
+
+procedure TFIdiomasABM.dbeNombreKeyPress(Sender: TObject; var Key: Char);
+begin
+  if ((not(CharInSet(UpCase(Key), ['A'..'Z'])) and (not(CharInSet(key, [#8,#13,#32,#225,#233,#237,#243,#250])))))then
+    Key := #0;
+  EnterComoTab(Self, Key);
+end;
+
+procedure TFIdiomasABM.DBGrid1DblClick(Sender: TObject);
+begin
+  AModificarExecute(Self);
+end;
+
 procedure TFIdiomasABM.FormCreate(Sender: TObject);
 begin
   AProcesarExecute(Self);
+  FPrincipal.lbPosicion.Caption:='Administrar >> Idiomas'
 end;
 
 procedure TFIdiomasABM.SpeedButton4Click(Sender: TObject);
@@ -130,8 +189,6 @@ begin
   DBGrid1.Enabled := True;
 
   pnlDatos.Hide;
-  if(_Modo='M')then
-    qIdioma.Post;
   AProcesarExecute(Self);
 end;
 
@@ -141,6 +198,7 @@ begin
   edFiltrar.Enabled := false;
   Panel1.Enabled := false;
   DBGrid1.Enabled := false;
+  dbeNombre.SetFocus;
 
   if (_Modo = 'A') then
     qIdioma.Insert

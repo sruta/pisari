@@ -1,0 +1,2 @@
+ALTER TABLE Autor
+ADD UNIQUE (Nombre)

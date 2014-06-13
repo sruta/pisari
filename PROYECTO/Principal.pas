@@ -32,7 +32,7 @@ var
 
 implementation
 
-uses Administrar;
+uses Administrar, LibroABM;
 
 {$R *.dfm}
 
